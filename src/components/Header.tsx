@@ -8,6 +8,7 @@ const navItems = [
   { label: "What We Do", href: "/#what-we-do", scrollTo: "what-we-do" },
   { label: "About Company", href: "/about" },
   { label: "Contact Us", href: "/#contact", scrollTo: "contact" },
+  { label: "Login", href: "/login" },
 ];
 
 const Header = () => {
