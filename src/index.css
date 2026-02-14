@@ -39,14 +39,15 @@
     --primary-dark: 203 93% 39%;
     --hero-bg: 222 40% 7%;
     --hero-overlay: 222 40% 4%;
-    --section-dark: 222 30% 8%;
-    --section-light: 220 20% 97%;
-    --card-dark: 222 25% 12%;
-    --card-dark-border: 203 60% 30%;
+    --section-dark: 220 20% 96%;
+    --section-light: 0 0% 100%;
+    --card-dark: 220 15% 98%;
+    --card-dark-border: 220 15% 85%;
     --glow-primary: 203 94% 54%;
     --glow-accent: 24 93% 50%;
-    --footer-bg: 222 40% 5%;
-    --nav-bg: 0 0% 0%;
+    --footer-bg: 220 20% 12%;
+    --nav-bg: 0 0% 100%;
+    --section-dark-text: 220 30% 10%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -78,6 +79,16 @@
     --border: 220 20% 18%;
     --input: 220 20% 18%;
     --ring: 203 94% 54%;
+
+    --hero-bg: 222 40% 7%;
+    --hero-overlay: 222 40% 4%;
+    --section-dark: 222 30% 8%;
+    --section-light: 220 20% 97%;
+    --card-dark: 222 25% 12%;
+    --card-dark-border: 203 60% 30%;
+    --footer-bg: 222 40% 5%;
+    --nav-bg: 0 0% 0%;
+    --section-dark-text: 0 0% 95%;
   }
 }
 
@@ -111,7 +122,7 @@
   }
   .section-dark {
     background-color: hsl(var(--section-dark));
-    color: hsl(0 0% 95%);
+    color: hsl(var(--section-dark-text));
   }
   .section-light {
     background-color: hsl(var(--section-light));
@@ -129,7 +140,7 @@ html {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(var(--hero-bg));
+  background: hsl(var(--background));
 }
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--primary) / 0.5);

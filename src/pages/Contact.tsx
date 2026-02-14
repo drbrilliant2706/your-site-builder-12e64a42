@@ -8,7 +8,6 @@ const Contact = () => {
     <div className="min-h-screen">
       <Header />
 
-      {/* Hero */}
       <section className="pt-32 pb-16 section-dark">
         <div className="container px-4 text-center">
           <motion.h1
@@ -21,7 +20,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Form */}
       <section className="py-20 section-dark">
         <div className="container px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 max-w-5xl mx-auto">
@@ -36,23 +34,23 @@ const Contact = () => {
                 type="text"
                 placeholder="Name"
                 required
-                className="w-full px-5 py-4 rounded-sm bg-card-dark border border-card-dark-border/30 text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:border-primary transition-colors"
+                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
               />
               <input
                 type="tel"
                 placeholder="Phone Number"
-                className="w-full px-5 py-4 rounded-sm bg-card-dark border border-card-dark-border/30 text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:border-primary transition-colors"
+                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
               />
               <input
                 type="email"
                 placeholder="Email"
                 required
-                className="w-full px-5 py-4 rounded-sm bg-card-dark border border-card-dark-border/30 text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:border-primary transition-colors"
+                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
               />
               <textarea
                 placeholder="Message"
                 rows={5}
-                className="w-full px-5 py-4 rounded-sm bg-card-dark border border-card-dark-border/30 text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:border-primary transition-colors resize-none"
+                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
               />
               <button
                 type="submit"
@@ -69,21 +67,21 @@ const Contact = () => {
               viewport={{ once: true }}
               className="space-y-8"
             >
-              <div className="p-8 rounded-lg bg-card-dark border border-card-dark-border/30 tech-glow">
+              <div className="p-8 rounded-lg bg-card border border-border tech-glow">
                 <h3 className="text-2xl font-bold font-display mb-6">Contact Information</h3>
                 <ul className="space-y-5">
                   <li className="flex items-start gap-4">
                     <MapPin className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                    <span className="text-primary-foreground/60">Sapphire Tower, Dubai, UAE</span>
+                    <span className="opacity-60">Sapphire Tower, Dubai, UAE</span>
                   </li>
                   <li>
-                    <a href="tel:+971522900966" className="flex items-center gap-4 text-primary-foreground/60 hover:text-primary transition-colors">
+                    <a href="tel:+971522900966" className="flex items-center gap-4 opacity-60 hover:text-primary hover:opacity-100 transition-all">
                       <Phone className="w-5 h-5 text-primary shrink-0" />
                       +971 522 900 966
                     </a>
                   </li>
                   <li>
-                    <a href="mailto:Info@tekvion.ae" className="flex items-center gap-4 text-primary-foreground/60 hover:text-primary transition-colors">
+                    <a href="mailto:Info@tekvion.ae" className="flex items-center gap-4 opacity-60 hover:text-primary hover:opacity-100 transition-all">
                       <Mail className="w-5 h-5 text-primary shrink-0" />
                       Info@tekvion.ae
                     </a>

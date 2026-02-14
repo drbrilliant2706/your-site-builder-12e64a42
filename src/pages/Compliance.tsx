@@ -37,7 +37,6 @@ const Compliance = () => {
     <div className="min-h-screen">
       <Header />
 
-      {/* Hero */}
       <section className="pt-32 pb-16 section-dark">
         <div className="container px-4 text-center">
           <motion.h1
@@ -51,14 +50,13 @@ const Compliance = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg text-primary-foreground/60 max-w-3xl mx-auto"
+            className="text-lg opacity-60 max-w-3xl mx-auto"
           >
             We align our delivery and operations with leading regulatory frameworks, security guidelines, and risk management best practices—so your solutions stay secure, compliant, and fit for the UAE and global markets.
           </motion.p>
         </div>
       </section>
 
-      {/* Cards */}
       <section className="py-20 section-dark">
         <div className="container px-4 max-w-4xl mx-auto">
           <div className="space-y-6">
@@ -69,14 +67,14 @@ const Compliance = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="flex gap-6 p-8 rounded-lg bg-card-dark border border-card-dark-border/30 tech-glow"
+                className="flex gap-6 p-8 rounded-lg bg-card border border-border tech-glow"
               >
                 <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                   <item.icon className="w-7 h-7 text-primary" />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold font-display mb-2">{item.title}</h3>
-                  <p className="text-primary-foreground/60 leading-relaxed text-sm">{item.description}</p>
+                  <p className="opacity-60 leading-relaxed text-sm">{item.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -84,10 +82,9 @@ const Compliance = () => {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-20 section-dark">
         <div className="container px-4 text-center">
-          <p className="text-xl text-primary-foreground/70 mb-8">
+          <p className="text-xl opacity-70 mb-8">
             Need help with regulatory alignment or risk management?
           </p>
           <Link
