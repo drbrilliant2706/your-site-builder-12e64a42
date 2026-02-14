@@ -6,12 +6,11 @@ import { useTheme } from "./ThemeProvider";
 const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/#about-us", scrollTo: "about-us" },
-  { label: "What We Do", href: "/#what-we-do", scrollTo: "what-we-do" },
+  { label: "What we do", href: "/#what-we-do", scrollTo: "what-we-do" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "Compliance", href: "/compliance" },
-  { label: "About Company", href: "/about" },
+  { label: "Value Proposition", href: "/value-proposition" },
   { label: "Contact Us", href: "/contact" },
-  { label: "Login", href: "/login" },
 ];
 
 const Header = () => {
@@ -28,10 +27,10 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-nav/80 backdrop-blur-md border-b border-primary/10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[hsl(220,20%,12%)]/95 backdrop-blur-md border-b border-white/5">
       <div className="container mx-auto flex items-center justify-between h-20 px-4">
         <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl font-bold font-display tracking-wide text-foreground">
+          <span className="text-2xl font-bold font-display tracking-wide text-white">
             TEK<span className="text-primary">VION</span>
           </span>
         </Link>
@@ -43,14 +42,20 @@ const Header = () => {
               key={item.label}
               to={item.href}
               onClick={() => handleNavClick(item)}
-              className="text-sm font-medium text-foreground/70 hover:text-primary transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-accent after:transition-all hover:after:w-full"
+              className="text-sm font-medium text-white/70 hover:text-primary transition-colors"
             >
               {item.label}
             </Link>
           ))}
+          <Link
+            to="/login"
+            className="text-sm font-semibold text-white hover:text-primary transition-colors ml-4"
+          >
+            Login
+          </Link>
           <button
             onClick={toggleTheme}
-            className="ml-2 w-9 h-9 rounded-full flex items-center justify-center bg-muted hover:bg-primary/10 text-foreground/70 hover:text-primary transition-all"
+            className="ml-2 w-9 h-9 rounded-full flex items-center justify-center bg-white/5 hover:bg-primary/10 text-white/70 hover:text-primary transition-all"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -61,13 +66,13 @@ const Header = () => {
         <div className="flex items-center gap-2 lg:hidden">
           <button
             onClick={toggleTheme}
-            className="w-9 h-9 rounded-full flex items-center justify-center bg-muted hover:bg-primary/10 text-foreground/70 hover:text-primary transition-all"
+            className="w-9 h-9 rounded-full flex items-center justify-center bg-white/5 hover:bg-primary/10 text-white/70 hover:text-primary transition-all"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
           <button
-            className="text-foreground p-2"
+            className="text-white p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -78,17 +83,24 @@ const Header = () => {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-nav/95 backdrop-blur-md border-t border-primary/10 px-4 pb-6">
+        <div className="lg:hidden bg-[hsl(220,20%,12%)]/95 backdrop-blur-md border-t border-white/5 px-4 pb-6">
           {navItems.map((item) => (
             <Link
               key={item.label}
               to={item.href}
               onClick={() => handleNavClick(item)}
-              className="block py-3 text-sm text-foreground/70 hover:text-primary transition-colors border-b border-primary/5"
+              className="block py-3 text-sm text-white/70 hover:text-primary transition-colors border-b border-white/5"
             >
               {item.label}
             </Link>
           ))}
+          <Link
+            to="/login"
+            onClick={() => setMobileOpen(false)}
+            className="block py-3 text-sm font-semibold text-white hover:text-primary transition-colors"
+          >
+            Login
+          </Link>
         </div>
       )}
     </header>

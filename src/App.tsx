@@ -12,6 +12,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Portfolio from "./pages/Portfolio";
 import Compliance from "./pages/Compliance";
 import Contact from "./pages/Contact";
+import ValueProposition from "./pages/ValueProposition";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/compliance" element={<Compliance />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/value-proposition" element={<ValueProposition />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

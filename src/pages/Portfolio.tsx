@@ -40,27 +40,28 @@ const Portfolio = () => {
     <div className="min-h-screen">
       <Header />
 
-      <section className="pt-32 pb-16 section-dark">
-        <div className="container px-4 text-center">
+      {/* Blue gradient banner */}
+      <section className="pt-32 pb-16 bg-gradient-to-r from-[hsl(210,80%,20%)] to-[hsl(203,94%,40%)] relative">
+        <div className="container px-4 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-bold font-display mb-6"
+            className="text-4xl md:text-5xl font-bold font-display text-white mb-4"
           >
-            Our <span className="gradient-text">Portfolio</span>
+            Our Portfolio
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg opacity-60 max-w-2xl mx-auto"
+            className="text-base text-white/80 max-w-2xl mx-auto"
           >
             Showcasing our work across AI, cloud, data, and cybersecurity solutions.
           </motion.p>
         </div>
       </section>
 
-      <section className="py-20 section-dark">
+      <section className="py-20 bg-background">
         <div className="container px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {projects.map((project, i) => (
@@ -70,7 +71,7 @@ const Portfolio = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="group rounded-lg overflow-hidden bg-card border border-border tech-glow"
+                className="group rounded-lg overflow-hidden bg-card border border-border shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="h-52 overflow-hidden">
                   <img
@@ -82,8 +83,8 @@ const Portfolio = () => {
                 </div>
                 <div className="p-6">
                   <span className="text-xs font-semibold text-primary uppercase tracking-wider">{project.category}</span>
-                  <h3 className="text-xl font-bold font-display mt-2 mb-3">{project.title}</h3>
-                  <p className="text-sm opacity-60 leading-relaxed">{project.description}</p>
+                  <h3 className="text-xl font-bold font-display text-foreground mt-2 mb-3">{project.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{project.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -91,9 +92,9 @@ const Portfolio = () => {
         </div>
       </section>
 
-      <section className="py-20 section-dark">
+      <section className="py-20 bg-background">
         <div className="container px-4 text-center">
-          <p className="text-xl opacity-70 mb-8">
+          <p className="text-xl text-muted-foreground mb-8">
             Interested in working with us?
           </p>
           <Link

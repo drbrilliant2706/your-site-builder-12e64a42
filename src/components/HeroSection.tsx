@@ -40,6 +40,20 @@ const HeroSection = () => {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-hero/80 via-hero/60 to-hero" />
 
+      {/* Slide number indicator on left */}
+      <div className="absolute left-6 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col items-center gap-2">
+        {slides.map((_, i) => (
+          <div key={i} className="flex flex-col items-center">
+            <span className={`text-xs font-mono transition-all ${i === current ? "text-white" : "text-white/30"}`}>
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            {i < slides.length - 1 && (
+              <div className={`w-px h-16 my-1 transition-all ${i === current ? "bg-white" : "bg-white/20"}`} />
+            )}
+          </div>
+        ))}
+      </div>
+
       {/* Content */}
       <div className="container relative z-10 px-4 pt-20">
         <AnimatePresence mode="wait">
@@ -60,7 +74,7 @@ const HeroSection = () => {
             <div className="flex flex-wrap gap-4">
               <a
                 href="#about-us"
-                className="inline-flex items-center px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary-dark transition-colors"
+                className="inline-flex items-center px-8 py-3 bg-white text-foreground font-semibold rounded-sm hover:bg-white/90 transition-colors"
               >
                 About Company
               </a>
@@ -82,7 +96,7 @@ const HeroSection = () => {
               onClick={() => setCurrent(i)}
               className={`w-3 h-3 rounded-full transition-all ${
                 i === current
-                  ? "bg-primary w-8"
+                  ? "bg-white w-8"
                   : "bg-white/30 hover:bg-white/50"
               }`}
               aria-label={`Go to slide ${i + 1}`}
