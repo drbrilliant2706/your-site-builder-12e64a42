@@ -1,38 +1,32 @@
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { Shield, Globe, BookOpen, Handshake, CheckCircle } from "lucide-react";
+import { Shield, TrendingUp, Lock, Diamond } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
-const complianceItems = [
+const items = [
   {
     icon: Shield,
-    title: "Alignment with UAE Cyber Security Council Guidelines",
-    description: "Our solutions and practices align with the UAE Cyber Security Council's guidelines and national cybersecurity strategy, helping you meet local regulatory expectations and protect critical assets.",
+    title: "UAE-compliant, governance-driven IT solutions",
+    description: "Our solutions are designed to meet UAE regulatory and governance requirements. We embed compliance and governance into delivery so your IT stays aligned with local standards and best practices.",
   },
   {
-    icon: Globe,
-    title: "Data Residency and Sovereignty Compliance",
-    description: "We design and implement architectures that respect data residency and sovereignty requirements, including UAE and regional mandates, so your data stays where it is required and remains compliant.",
+    icon: TrendingUp,
+    title: "Scalable services aligned with business outcomes",
+    description: "We scale technology and services with your growth and objectives. From design to operations, our offerings are aligned with measurable business outcomes so you get results that matter.",
   },
   {
-    icon: BookOpen,
-    title: "Information Service Management Standards and Frameworks",
-    description: "We apply established standards and frameworks—such as ITIL, ISO 20000, and related ISM practices—to deliver consistent, measurable service quality and continuous improvement.",
+    icon: Lock,
+    title: "Reduced operational, regulatory, and cybersecurity risk",
+    description: "We help lower operational, regulatory, and cybersecurity risk through structured processes, security-by-design, and ongoing monitoring—so you can focus on growth with greater confidence.",
   },
   {
-    icon: Handshake,
-    title: "Vendor Governance",
-    description: "Structured vendor governance ensures third-party products and services are selected, monitored, and managed in line with your risk appetite and compliance obligations.",
-  },
-  {
-    icon: CheckCircle,
-    title: "IT Risk Management Best Practices",
-    description: "We embed IT risk management best practices across the lifecycle—from assessment and treatment to monitoring and reporting—so risks are identified, owned, and managed effectively.",
+    icon: Diamond,
+    title: "Sustainable, long-term technology value",
+    description: "We build for the long term: architectures, practices, and partnerships that deliver sustained value, reduce waste, and keep your technology fit for the future.",
   },
 ];
 
-const Compliance = () => {
+const ValueProposition = () => {
   return (
     <div className="min-h-screen">
       <Header />
@@ -45,7 +39,7 @@ const Compliance = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl md:text-5xl font-bold font-display text-white mb-4"
           >
-            Regulatory, Risks & Compliance
+            Value Proposition
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -53,7 +47,7 @@ const Compliance = () => {
             transition={{ delay: 0.1 }}
             className="text-base text-white/80 max-w-3xl mx-auto"
           >
-            We align our delivery and operations with leading regulatory frameworks, security guidelines, and risk management best practices—so your solutions stay secure, compliant, and fit for the UAE and global markets.
+            We deliver IT solutions that are UAE-compliant, scalable, and risk-aware—so your business gains sustainable, long-term technology value.
           </motion.p>
         </div>
       </section>
@@ -61,7 +55,7 @@ const Compliance = () => {
       <section className="py-20 bg-background">
         <div className="container px-4 max-w-4xl mx-auto">
           <div className="space-y-6">
-            {complianceItems.map((item, i) => (
+            {items.map((item, i) => (
               <motion.div
                 key={item.title}
                 initial={{ opacity: 0, y: 20 }}
@@ -88,4 +82,4 @@ const Compliance = () => {
   );
 };
 
-export default Compliance;
+export default ValueProposition;

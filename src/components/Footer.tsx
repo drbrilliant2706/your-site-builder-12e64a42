@@ -3,68 +3,84 @@ import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Instagram, Youtube } 
 
 const Footer = () => {
   return (
-    <footer className="bg-footer pt-16 pb-8 text-primary-foreground">
+    <footer className="bg-[hsl(203,90%,35%)] pt-16 pb-8 text-white">
       <div className="container px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          {/* Logo & newsletter */}
-          <div className="md:col-span-2">
-            <Link to="/" className="inline-block mb-6">
-              <span className="text-2xl font-bold font-display tracking-wide">
-                TEK<span className="text-primary">VION</span>
-              </span>
-            </Link>
-            <p className="opacity-50 text-sm mb-6 max-w-sm">
-              Dubai-based technology consulting delivering high-impact AI, cloud, and digital transformation solutions.
-            </p>
-            <div className="flex">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-primary-foreground/5 border border-primary-foreground/10 placeholder:text-primary-foreground/30 rounded-l-sm text-sm focus:outline-none focus:border-primary"
-              />
-              <button className="px-6 py-3 bg-accent text-accent-foreground font-semibold text-sm rounded-r-sm hover:brightness-110 transition-all whitespace-nowrap">
-                Subscribe
-              </button>
-            </div>
+        {/* Subscribe bar */}
+        <div className="flex flex-col md:flex-row items-center gap-4 mb-12">
+          <Link to="/" className="shrink-0">
+            <span className="text-2xl font-bold font-display tracking-wide">
+              TEK<span className="text-white">VION</span>
+            </span>
+          </Link>
+          <div className="flex flex-1 max-w-xl ml-auto">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="flex-1 px-4 py-3 bg-white/10 border border-white/20 placeholder:text-white/40 rounded-l-sm text-sm focus:outline-none focus:border-white/50 text-white"
+            />
+            <button className="px-6 py-3 bg-accent text-white font-semibold text-sm rounded-r-sm hover:brightness-110 transition-all whitespace-nowrap uppercase tracking-wide">
+              Subscribe Now
+            </button>
           </div>
+        </div>
 
-          {/* Links */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+          {/* Useful Links */}
           <div>
-            <h3 className="text-lg font-bold font-display mb-4">Useful Links</h3>
+            <h3 className="text-lg font-bold font-display mb-4 uppercase">Useful Links</h3>
             <ul className="space-y-2">
-              {["Home", "About", "What We Do", "Contact Us"].map((link) => (
-                <li key={link}>
-                  <a href={link === "Home" ? "/" : `/#${link.toLowerCase().replace(/\s+/g, "-")}`} className="text-sm opacity-50 hover:text-primary hover:opacity-100 transition-all">
-                    {link}
-                  </a>
+              {[
+                { label: "Home", href: "/" },
+                { label: "About", href: "/about" },
+                { label: "What we do", href: "/#what-we-do" },
+                { label: "Portfolio", href: "/portfolio" },
+                { label: "Compliance", href: "/compliance" },
+                { label: "Value Proposition", href: "/value-proposition" },
+                { label: "Contact us", href: "/contact" },
+              ].map((link) => (
+                <li key={link.label}>
+                  <Link to={link.href} className="text-sm text-white/60 hover:text-white transition-all">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
-              <li>
-                <Link to="/about" className="text-sm opacity-50 hover:text-primary hover:opacity-100 transition-all">
-                  About Company
-                </Link>
-              </li>
             </ul>
+          </div>
+
+          {/* News */}
+          <div>
+            <h3 className="text-lg font-bold font-display mb-4 uppercase">News</h3>
+            <p className="text-sm text-white/60 leading-relaxed">
+              It is a long established fact that a reader will be distracted by the readable content of a page when
+            </p>
+          </div>
+
+          {/* Company */}
+          <div>
+            <h3 className="text-lg font-bold font-display mb-4 uppercase">Company</h3>
+            <p className="text-sm text-white/60 leading-relaxed">
+              It is a long established fact that a reader will be distracted by the readable content of a page when
+            </p>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="text-lg font-bold font-display mb-4">Contact Us</h3>
+            <h3 className="text-lg font-bold font-display mb-4 uppercase">Contact Us</h3>
             <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-sm opacity-50">
-                <MapPin className="w-4 h-4 mt-0.5 text-primary shrink-0" />
-                Sapphire Tower, Dubai, UAE
+              <li className="flex items-start gap-3 text-sm text-white/60">
+                <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
+                Location
               </li>
               <li>
-                <a href="tel:+971522900966" className="flex items-center gap-3 text-sm opacity-50 hover:text-primary hover:opacity-100 transition-all">
-                  <Phone className="w-4 h-4 text-primary shrink-0" />
-                  +971 522 900 966
+                <a href="tel:+011234567890" className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-all">
+                  <Phone className="w-4 h-4 shrink-0" />
+                  Call +01 1234567890
                 </a>
               </li>
               <li>
-                <a href="mailto:Info@tekvion.ae" className="flex items-center gap-3 text-sm opacity-50 hover:text-primary hover:opacity-100 transition-all">
-                  <Mail className="w-4 h-4 text-primary shrink-0" />
-                  Info@tekvion.ae
+                <a href="mailto:demo@gmail.com" className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-all">
+                  <Mail className="w-4 h-4 shrink-0" />
+                  demo@gmail.com
                 </a>
               </li>
             </ul>
@@ -72,16 +88,16 @@ const Footer = () => {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-primary-foreground/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm opacity-40">
-            © 2026 All Rights Reserved. TekVion Technologies
+        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-white/40">
+            © 2020 All Rights Reserved. Free Html Template
           </p>
           <div className="flex gap-4">
             {[Facebook, Twitter, Linkedin, Instagram, Youtube].map((Icon, i) => (
               <a
                 key={i}
                 href="#"
-                className="w-9 h-9 rounded-full bg-primary-foreground/5 flex items-center justify-center opacity-40 hover:bg-primary hover:text-primary-foreground hover:opacity-100 transition-all"
+                className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-white/60 hover:bg-white hover:text-[hsl(203,90%,35%)] transition-all"
                 aria-label="Social link"
               >
                 <Icon className="w-4 h-4" />
