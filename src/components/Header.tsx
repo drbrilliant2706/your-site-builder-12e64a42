@@ -6,8 +6,10 @@ const navItems = [
   { label: "Home", href: "/" },
   { label: "About", href: "/#about-us", scrollTo: "about-us" },
   { label: "What We Do", href: "/#what-we-do", scrollTo: "what-we-do" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Compliance", href: "/compliance" },
   { label: "About Company", href: "/about" },
-  { label: "Contact Us", href: "/#contact", scrollTo: "contact" },
+  { label: "Contact Us", href: "/contact" },
   { label: "Login", href: "/login" },
 ];
 
