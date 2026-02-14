@@ -14,6 +14,9 @@ import Compliance from "./pages/Compliance";
 import Contact from "./pages/Contact";
 import ValueProposition from "./pages/ValueProposition";
 import NotFound from "./pages/NotFound";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminContent from "./pages/admin/AdminContent";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +37,11 @@ const App = () => (
             <Route path="/compliance" element={<Compliance />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/value-proposition" element={<ValueProposition />} />
+            {/* Admin routes */}
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboard />} />
+              <Route path="content" element={<AdminContent />} />
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
