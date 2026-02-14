@@ -37,22 +37,22 @@ const ContactSection = () => {
               <input
                 type="text"
                 placeholder="Name"
-                className="w-full px-5 py-4 rounded-sm bg-card-dark border border-card-dark-border/30 text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:border-primary transition-colors"
+                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
               />
               <input
                 type="tel"
                 placeholder="Phone Number"
-                className="w-full px-5 py-4 rounded-sm bg-card-dark border border-card-dark-border/30 text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:border-primary transition-colors"
+                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
               />
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full px-5 py-4 rounded-sm bg-card-dark border border-card-dark-border/30 text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:border-primary transition-colors"
+                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
               />
               <textarea
                 placeholder="Message"
                 rows={5}
-                className="w-full px-5 py-4 rounded-sm bg-card-dark border border-card-dark-border/30 text-primary-foreground placeholder:text-primary-foreground/30 focus:outline-none focus:border-primary transition-colors resize-none"
+                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none"
               />
               <button
                 type="submit"
@@ -73,9 +73,9 @@ const ContactSection = () => {
             <h2 className="text-4xl font-bold font-display mb-8">
               What Clients <span className="gradient-text">Say</span>
             </h2>
-            <div className="relative p-8 rounded-lg bg-card-dark border border-card-dark-border/30 min-h-[280px]">
+            <div className="relative p-8 rounded-lg bg-card border border-border min-h-[280px]">
               <Quote className="w-10 h-10 text-primary/20 mb-4" />
-              <p className="text-primary-foreground/70 leading-relaxed mb-6 text-lg">
+              <p className="opacity-70 leading-relaxed mb-6 text-lg">
                 {testimonials[currentTestimonial].text}
               </p>
               <p className="font-bold font-display text-xl text-primary">
@@ -90,7 +90,7 @@ const ContactSection = () => {
                   className={`w-3 h-3 rounded-full transition-all ${
                     i === currentTestimonial
                       ? "bg-primary w-8"
-                      : "bg-primary-foreground/20 hover:bg-primary-foreground/40"
+                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
                   }`}
                   aria-label={`Testimonial ${i + 1}`}
                 />
