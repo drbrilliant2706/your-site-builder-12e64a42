@@ -32,12 +32,12 @@ const ValueProposition = () => {
       <Header />
 
       {/* Blue gradient banner */}
-      <section className="pt-32 pb-16 bg-gradient-to-r from-[hsl(210,80%,20%)] to-[hsl(203,94%,40%)] relative">
+      <section className="pt-24 sm:pt-32 pb-10 sm:pb-16 bg-gradient-to-r from-[hsl(210,80%,20%)] to-[hsl(203,94%,40%)] relative">
         <div className="container px-4 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-bold font-display text-white mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-white mb-4"
           >
             Value Proposition
           </motion.h1>
@@ -52,9 +52,9 @@ const ValueProposition = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-background">
+      <section className="py-12 sm:py-20 bg-background">
         <div className="container px-4 max-w-4xl mx-auto">
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {items.map((item, i) => (
               <motion.div
                 key={item.title}
@@ -62,14 +62,14 @@ const ValueProposition = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="flex gap-6 p-8 rounded-lg bg-card border border-border shadow-sm"
+                className="flex flex-col sm:flex-row gap-3 sm:gap-6 p-5 sm:p-8 rounded-lg bg-card border border-border shadow-sm"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                  <item.icon className="w-6 h-6 text-primary" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                  <item.icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold font-display text-foreground mb-2">{item.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">{item.description}</p>
+                  <h3 className="text-base sm:text-lg font-bold font-display text-foreground mb-1 sm:mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-xs sm:text-sm">{item.description}</p>
                 </div>
               </motion.div>
             ))}

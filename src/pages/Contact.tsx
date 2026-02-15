@@ -8,13 +8,13 @@ const Contact = () => {
     <div className="min-h-screen">
       <Header />
 
-      <section className="pt-32 pb-20 bg-background">
+      <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 bg-background">
         <div className="container px-4 max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold font-display text-foreground mb-2">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-foreground mb-2">
               Get In Touch
             </h1>
             <div className="w-16 h-1 bg-primary mb-10" />

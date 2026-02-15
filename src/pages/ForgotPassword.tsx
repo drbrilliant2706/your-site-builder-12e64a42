@@ -15,7 +15,7 @@ const ForgotPassword = () => {
           initial={{ opacity: 0, y: 30, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="relative z-10 w-full max-w-[480px] bg-card rounded-2xl p-10 shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-border overflow-hidden text-center"
+          className="relative z-10 w-full max-w-[480px] bg-card rounded-2xl p-6 sm:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-border overflow-hidden text-center"
         >
           {/* Top gradient border */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-primary to-primary-dark" />
