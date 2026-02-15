@@ -6,7 +6,8 @@ import {
   Quote,
   Settings,
   ExternalLink,
-  PanelLeft,
+  Mail,
+  Image,
 } from "lucide-react";
 import {
   Sidebar,
@@ -23,9 +24,11 @@ import {
 
 const mainNav = [
   { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
-  { title: "Content", url: "/admin/content", icon: FileEdit },
+  { title: "Hero Slides", url: "/admin/content", icon: Image },
   { title: "Services", url: "/admin/content?tab=services", icon: Grid3X3 },
   { title: "Testimonials", url: "/admin/content?tab=testimonials", icon: Quote },
+  { title: "About", url: "/admin/content?tab=about", icon: FileEdit },
+  { title: "Messages", url: "/admin/content?tab=messages", icon: Mail },
 ];
 
 const siteNav = [

@@ -1,13 +1,34 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Mail, Lock, ArrowRight } from "lucide-react";
+import { Mail, Lock, ArrowRight, Loader2 } from "lucide-react";
 import Header from "@/components/Header";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [activeTab, setActiveTab] = useState<"signin" | "admin">("signin");
+  const [loading, setLoading] = useState(false);
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !password) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    setLoading(true);
+    const { error } = await signIn(email, password);
+    setLoading(false);
+    if (error) {
+      toast.error(error);
+    } else {
+      toast.success("Signed in successfully");
+      navigate("/admin");
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -19,37 +40,12 @@ const Login = () => {
           transition={{ duration: 0.6 }}
           className="relative z-10 w-full max-w-[480px] bg-card rounded-2xl p-6 sm:p-10 shadow-[0_20px_60px_rgba(0,0,0,0.08)] border border-border overflow-hidden"
         >
-          {/* Top gradient border */}
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-primary to-primary-dark" />
-
-          {/* Tabs */}
-          <div className="flex border-b border-border mb-8">
-            <button
-              onClick={() => setActiveTab("signin")}
-              className={`pb-3 px-1 mr-6 text-sm font-semibold transition-colors relative ${
-                activeTab === "signin"
-                  ? "text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Sign in
-            </button>
-            <button
-              onClick={() => setActiveTab("admin")}
-              className={`pb-3 px-1 text-sm font-semibold transition-colors relative ${
-                activeTab === "admin"
-                  ? "text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Admin / CMS
-            </button>
-          </div>
 
           <h1 className="text-2xl font-bold font-display text-foreground mb-1">Welcome back</h1>
           <p className="text-muted-foreground text-sm mb-8">Sign in to your Tekvion account</p>
 
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">Email</label>
               <div className="relative">
@@ -90,10 +86,10 @@ const Login = () => {
 
             <button
               type="submit"
-              className="w-full h-12 flex items-center justify-center gap-2 text-sm font-semibold text-primary-foreground bg-primary rounded-full hover:bg-primary-dark transition-colors"
+              disabled={loading}
+              className="w-full h-12 flex items-center justify-center gap-2 text-sm font-semibold text-primary-foreground bg-primary rounded-full hover:bg-primary-dark transition-colors disabled:opacity-60"
             >
-              Sign in
-              <ArrowRight className="w-4 h-4" />
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <>Sign in <ArrowRight className="w-4 h-4" /></>}
             </button>
           </form>
 
