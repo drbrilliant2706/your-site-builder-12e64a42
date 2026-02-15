@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Instagram, Youtube } from "lucide-react";
+import tekvionLogo from "@/assets/tekvion-logo.png";
 
 const Footer = () => {
   return (
@@ -8,9 +9,7 @@ const Footer = () => {
         {/* Subscribe bar */}
         <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-12">
           <Link to="/" className="shrink-0">
-            <span className="text-2xl font-bold font-display tracking-wide">
-              TEK<span className="text-white">VION</span>
-            </span>
+            <img src={tekvionLogo} alt="TekVion Technology" className="h-10 brightness-0 invert" />
           </Link>
           <div className="flex w-full md:flex-1 md:max-w-xl md:ml-auto">
             <input
