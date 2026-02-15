@@ -4,6 +4,7 @@ import { Send, Quote, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
+import { contactSchema, checkRateLimit } from "@/lib/validation";
 
 const ContactSection = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -23,9 +24,22 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !email || !message) { toast.error("Please fill required fields"); return; }
+    const result = contactSchema.safeParse({ name, email, phone, message });
+    if (!result.success) {
+      toast.error(result.error.errors[0]?.message || "Invalid input");
+      return;
+    }
+    if (!checkRateLimit("contact-section")) {
+      toast.error("Too many submissions. Please wait a moment.");
+      return;
+    }
     setSending(true);
-    const { error } = await supabase.from("contact_messages").insert({ name, phone, email, message });
+    const { error } = await supabase.from("contact_messages").insert({
+      name: result.data.name,
+      phone: result.data.phone || "",
+      email: result.data.email,
+      message: result.data.message,
+    });
     setSending(false);
     if (error) toast.error("Failed to send"); else {
       toast.success("Message sent!");
