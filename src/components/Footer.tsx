@@ -69,18 +69,18 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-sm text-white/60">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                Location
+                Sapphire Tower, Dubai, UAE
               </li>
               <li>
-                <a href="tel:+011234567890" className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-all">
+                <a href="tel:+971522900966" className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-all">
                   <Phone className="w-4 h-4 shrink-0" />
-                  Call +01 1234567890
+                  Call +971 522 900 966
                 </a>
               </li>
               <li>
-                <a href="mailto:demo@gmail.com" className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-all">
+                <a href="mailto:Info@tekvion.ae" className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-all">
                   <Mail className="w-4 h-4 shrink-0" />
-                  demo@gmail.com
+                  Info@tekvion.ae
                 </a>
               </li>
             </ul>
