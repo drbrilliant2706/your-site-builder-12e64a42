@@ -1,14 +1,46 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, User, ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password !== confirm) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters");
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { full_name: name },
+        emailRedirectTo: window.location.origin,
+      },
+    });
+    setLoading(false);
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Account created! You can now sign in.");
+      navigate("/login");
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -26,7 +58,7 @@ const Signup = () => {
           <h1 className="text-2xl font-bold font-display text-foreground mb-1">Create account</h1>
           <p className="text-muted-foreground text-sm mb-8">Join Tekvion and get started</p>
 
-          <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+           <form onSubmit={handleSignup} className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-foreground mb-2">Full name</label>
               <div className="relative">
@@ -36,6 +68,7 @@ const Signup = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="John Doe"
+                  required
                   className="w-full h-12 pl-11 pr-4 text-sm bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
@@ -50,6 +83,7 @@ const Signup = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
+                  required
                   className="w-full h-12 pl-11 pr-4 text-sm bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
@@ -64,6 +98,7 @@ const Signup = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
+                  required
                   className="w-full h-12 pl-11 pr-4 text-sm bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
@@ -78,6 +113,7 @@ const Signup = () => {
                   value={confirm}
                   onChange={(e) => setConfirm(e.target.value)}
                   placeholder="••••••••"
+                  required
                   className="w-full h-12 pl-11 pr-4 text-sm bg-background border border-border rounded-lg text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
                 />
               </div>
@@ -85,10 +121,11 @@ const Signup = () => {
 
             <button
               type="submit"
-              className="w-full h-12 flex items-center justify-center gap-2 text-sm font-semibold text-primary-foreground bg-primary rounded-full hover:bg-primary-dark transition-colors"
+              disabled={loading}
+              className="w-full h-12 flex items-center justify-center gap-2 text-sm font-semibold text-primary-foreground bg-primary rounded-full hover:bg-primary-dark transition-colors disabled:opacity-50"
             >
-              Sign up
-              <ArrowRight className="w-4 h-4" />
+              {loading ? "Signing up..." : "Sign up"}
+              {!loading && <ArrowRight className="w-4 h-4" />}
             </button>
           </form>
 
