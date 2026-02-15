@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import heroBanner from "@/assets/hero-banner.jpg";
+import TypedText from "./TypedText";
 
 const slides = [
   {
@@ -65,9 +66,17 @@ const HeroSection = () => {
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold font-display text-white leading-tight mb-4 sm:mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold font-display text-white leading-tight mb-2 sm:mb-4">
               {slides[current].title}
             </h1>
+            <div className="text-lg sm:text-xl md:text-2xl text-primary font-display font-semibold mb-4 sm:mb-6 h-8">
+              <TypedText
+                strings={["Creative Work Idea", "Cutting-edge Technology", "Beautiful Design"]}
+                typeSpeed={60}
+                backSpeed={30}
+                backDelay={2000}
+              />
+            </div>
             <p className="text-base sm:text-lg md:text-xl text-white/70 mb-8 sm:mb-10 max-w-2xl leading-relaxed">
               {slides[current].description}
             </p>
