@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import tekvionLogo from "@/assets/tekvion-logo.png";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -30,9 +31,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-[hsl(220,20%,12%)]/95 backdrop-blur-md border-b border-white/5">
       <div className="container mx-auto flex items-center justify-between h-20 px-4">
         <Link to="/" className="flex items-center gap-2">
-          <span className="text-2xl font-bold font-display tracking-wide text-white">
-            TEK<span className="text-primary">VION</span>
-          </span>
+          <img src={tekvionLogo} alt="TekVion Technology" className="h-10" />
         </Link>
 
         {/* Desktop nav */}
