@@ -21,16 +21,16 @@ const ContactSection = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   return (
-    <section id="contact" className="py-24 section-dark">
+    <section id="contact" className="py-16 sm:py-24 section-dark">
       <div className="container px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold font-display mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold font-display mb-6 sm:mb-8">
               Get In <span className="gradient-text">Touch</span>
             </h2>
             <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
@@ -70,7 +70,7 @@ const ContactSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold font-display mb-8">
+            <h2 className="text-3xl sm:text-4xl font-bold font-display mb-6 sm:mb-8">
               What Clients <span className="gradient-text">Say</span>
             </h2>
             <div className="relative p-8 rounded-lg bg-card border border-border min-h-[280px]">

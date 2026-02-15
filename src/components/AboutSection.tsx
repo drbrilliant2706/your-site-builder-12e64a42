@@ -3,7 +3,7 @@ import { Eye, Target } from "lucide-react";
 
 const AboutSection = () => {
   return (
-    <section id="about-us" className="py-24 section-dark">
+    <section id="about-us" className="py-16 sm:py-24 section-dark">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -6,20 +6,20 @@ const Footer = () => {
     <footer className="bg-[hsl(203,90%,35%)] pt-16 pb-8 text-white">
       <div className="container px-4">
         {/* Subscribe bar */}
-        <div className="flex flex-col md:flex-row items-center gap-4 mb-12">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-12">
           <Link to="/" className="shrink-0">
             <span className="text-2xl font-bold font-display tracking-wide">
               TEK<span className="text-white">VION</span>
             </span>
           </Link>
-          <div className="flex flex-1 max-w-xl ml-auto">
+          <div className="flex w-full md:flex-1 md:max-w-xl md:ml-auto">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 bg-white/10 border border-white/20 placeholder:text-white/40 rounded-l-sm text-sm focus:outline-none focus:border-white/50 text-white"
+              className="flex-1 min-w-0 px-3 sm:px-4 py-3 bg-white/10 border border-white/20 placeholder:text-white/40 rounded-l-sm text-sm focus:outline-none focus:border-white/50 text-white"
             />
-            <button className="px-6 py-3 bg-accent text-white font-semibold text-sm rounded-r-sm hover:brightness-110 transition-all whitespace-nowrap uppercase tracking-wide">
-              Subscribe Now
+            <button className="px-4 sm:px-6 py-3 bg-accent text-white font-semibold text-xs sm:text-sm rounded-r-sm hover:brightness-110 transition-all whitespace-nowrap uppercase tracking-wide">
+              Subscribe
             </button>
           </div>
         </div>

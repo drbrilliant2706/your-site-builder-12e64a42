@@ -55,7 +55,7 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section id="what-we-do" className="py-24 section-light relative overflow-hidden">
+    <section id="what-we-do" className="py-16 sm:py-24 section-light relative overflow-hidden">
       {/* Decorative blobs */}
       <div className="absolute top-[-100px] right-[-100px] w-[500px] h-[500px] rounded-full bg-primary/5 animate-float" />
       <div className="absolute bottom-[-100px] left-[-100px] w-[400px] h-[400px] rounded-full bg-primary/3 animate-float" style={{ animationDelay: "3s" }} />
@@ -75,7 +75,7 @@ const ServicesSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
@@ -86,7 +86,7 @@ const ServicesSection = () => {
               className="group bg-card rounded-lg overflow-hidden tech-glow border border-border hover:border-primary/30 transition-all"
             >
               {service.image ? (
-                <div className="h-48 overflow-hidden">
+                <div className="h-36 sm:h-48 overflow-hidden">
                   <img
                     src={service.image}
                     alt={service.title}
@@ -95,13 +95,13 @@ const ServicesSection = () => {
                   />
                 </div>
               ) : (
-                <div className="h-48 flex items-center justify-center bg-gradient-to-br from-primary/10 to-accent/10">
-                  {service.icon && <service.icon className="w-16 h-16 text-primary" />}
+                <div className="h-36 sm:h-48 flex items-center justify-center bg-gradient-to-br from-primary/10 to-accent/10">
+                  {service.icon && <service.icon className="w-12 sm:w-16 h-12 sm:h-16 text-primary" />}
                 </div>
               )}
-              <div className="p-6">
-                <h3 className="text-xl font-bold font-display text-foreground mb-2">{service.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-bold font-display text-foreground mb-2">{service.title}</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{service.description}</p>
               </div>
             </motion.div>
           ))}
