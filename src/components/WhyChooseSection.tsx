@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Users, Cpu, Trophy } from "lucide-react";
+import choseGeometric from "@/assets/chose-geometric.png";
 
 const reasons = [
   {
@@ -25,6 +26,9 @@ const reasons = [
 const WhyChooseSection = () => {
   return (
     <section className="py-16 sm:py-24 section-light relative overflow-hidden">
+      <div className="absolute inset-0 opacity-10">
+        <img src={choseGeometric} alt="" className="w-full h-full object-cover" />
+      </div>
       <div className="container relative z-10 px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
