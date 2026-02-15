@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import aboutCode from "@/assets/about-code.png";
 
 const About = () => {
   return (
@@ -30,20 +31,25 @@ const About = () => {
         </div>
       </section>
 
-      {/* Executive Summary */}
+      {/* Executive Summary with image */}
       <section className="py-10 sm:py-16 bg-background">
         <div className="container px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-4xl mx-auto p-5 sm:p-10 rounded-lg bg-card border border-border shadow-sm"
+            className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 items-center"
           >
-            <h2 className="text-2xl font-bold font-display text-foreground mb-2">Executive Summary</h2>
-            <p className="text-primary font-semibold text-sm mb-6 uppercase tracking-wide">TEKVION TECHNOLOGY L.L.C</p>
-            <p className="text-muted-foreground leading-relaxed text-sm">
-              is a Dubai-based technology consulting and services company delivering high-impact solutions across IT infrastructure, cloud, cybersecurity, artificial intelligence, and data-driven platforms. Licensed by the Department of Economy & Tourism – Dubai, Tekvion combines strategic consulting, digital transformation solution design and implementation, and managed services to help organizations modernize operations, secure digital assets, and turn technology into a measurable business advantage in line with the UAE government's mission for the IT sector.
-            </p>
+            <div className="p-5 sm:p-10 rounded-lg bg-card border border-border shadow-sm">
+              <h2 className="text-2xl font-bold font-display text-foreground mb-2">Executive Summary</h2>
+              <p className="text-primary font-semibold text-sm mb-6 uppercase tracking-wide">TEKVION TECHNOLOGY L.L.C</p>
+              <p className="text-muted-foreground leading-relaxed text-sm">
+                is a Dubai-based technology consulting and services company delivering high-impact solutions across IT infrastructure, cloud, cybersecurity, artificial intelligence, and data-driven platforms. Licensed by the Department of Economy & Tourism – Dubai, Tekvion combines strategic consulting, digital transformation solution design and implementation, and managed services to help organizations modernize operations, secure digital assets, and turn technology into a measurable business advantage in line with the UAE government's mission for the IT sector.
+              </p>
+            </div>
+            <div className="rounded-lg overflow-hidden shadow-sm">
+              <img src={aboutCode} alt="Technology and code" className="w-full h-full object-cover" loading="lazy" />
+            </div>
           </motion.div>
         </div>
       </section>

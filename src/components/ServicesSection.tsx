@@ -3,10 +3,10 @@ import serviceAi from "@/assets/service-ai.jpg";
 import serviceCloud from "@/assets/service-cloud.jpg";
 import serviceData from "@/assets/service-data.jpg";
 import serviceSecurity from "@/assets/service-security.jpg";
+import serviceApi from "@/assets/service-api.jpg";
+import serviceAutomation from "@/assets/service-automation.jpg";
 import {
-  Database,
   Globe,
-  Cog,
   Monitor,
 } from "lucide-react";
 
@@ -34,7 +34,7 @@ const services = [
   {
     title: "API & Integration",
     description: "Connect platforms and workflows with secure APIs, integrations, and scalable orchestration.",
-    icon: Database,
+    image: serviceApi,
   },
   {
     title: "Mobile & Web Development",
@@ -44,7 +44,7 @@ const services = [
   {
     title: "Intelligent Automation",
     description: "Streamline operations with workflow automation, RPA, and AI-driven process optimization.",
-    icon: Cog,
+    image: serviceAutomation,
   },
   {
     title: "IT & Infrastructure",
