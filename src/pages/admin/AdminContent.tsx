@@ -6,377 +6,305 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2, Loader2, Mail, Eye, EyeOff } from "lucide-react";
 import { toast } from "sonner";
-
-interface ServiceItem {
-  title: string;
-  description: string;
-  image: string;
-}
-
-interface TestimonialItem {
-  name: string;
-  role: string;
-  text: string;
-}
-
-const defaultServices: ServiceItem[] = [
-  { title: "AI Solutions", description: "Leverage artificial intelligence to transform your business.", image: "/assets/service-ai.jpg" },
-  { title: "Cloud Services", description: "Scalable and secure cloud infrastructure.", image: "/assets/service-cloud.jpg" },
-  { title: "Data Analytics", description: "Turn data into actionable insights.", image: "/assets/service-data.jpg" },
-  { title: "Cybersecurity", description: "Protect your digital assets.", image: "/assets/service-security.jpg" },
-];
-
-const defaultTestimonials: TestimonialItem[] = [
-  { name: "John Doe", role: "CEO, TechCorp", text: "Excellent service and support." },
-  { name: "Jane Smith", role: "CTO, Innovate Inc", text: "Transformed our digital infrastructure." },
-  { name: "Ahmed Ali", role: "Director, Gulf Tech", text: "Reliable partner for cloud solutions." },
-];
+import { supabase } from "@/integrations/supabase/client";
 
 export default function AdminContent() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentTab = searchParams.get("tab") || "homepage";
+  const currentTab = searchParams.get("tab") || "hero";
+  const [loading, setLoading] = useState(true);
 
-  // Homepage state
-  const [heroTitle, setHeroTitle] = useState("");
-  const [heroDesc, setHeroDesc] = useState("");
-  const [weDoIntro, setWeDoIntro] = useState("");
-  const [aboutIntro, setAboutIntro] = useState("");
-
-  // Services state
-  const [services, setServices] = useState<ServiceItem[]>([]);
-
-  // Testimonials state
-  const [testimonials, setTestimonials] = useState<TestimonialItem[]>([]);
-
-  // Settings state
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [copyright, setCopyright] = useState("");
+  // Hero slides
+  const [slides, setSlides] = useState<any[]>([]);
+  // Services
+  const [services, setServices] = useState<any[]>([]);
+  // Testimonials
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+  // Settings
+  const [settings, setSettings] = useState<any>(null);
+  // About
+  const [about, setAbout] = useState<any>(null);
+  // Contact messages
+  const [messages, setMessages] = useState<any[]>([]);
 
   useEffect(() => {
-    // Load from localStorage
-    setHeroTitle(localStorage.getItem("cms_heroTitle") || "");
-    setHeroDesc(localStorage.getItem("cms_heroDesc") || "");
-    setWeDoIntro(localStorage.getItem("cms_weDoIntro") || "");
-    setAboutIntro(localStorage.getItem("cms_aboutIntro") || "");
-
-    const savedServices = localStorage.getItem("cms_services");
-    setServices(savedServices ? JSON.parse(savedServices) : defaultServices);
-
-    const savedTestimonials = localStorage.getItem("cms_testimonials");
-    setTestimonials(savedTestimonials ? JSON.parse(savedTestimonials) : defaultTestimonials);
-
-    setAddress(localStorage.getItem("cms_address") || "");
-    setPhone(localStorage.getItem("cms_phone") || "");
-    setEmail(localStorage.getItem("cms_email") || "");
-    setCopyright(localStorage.getItem("cms_copyright") || "");
+    loadAll();
   }, []);
 
-  const saveHomepage = () => {
-    localStorage.setItem("cms_heroTitle", heroTitle);
-    localStorage.setItem("cms_heroDesc", heroDesc);
-    localStorage.setItem("cms_weDoIntro", weDoIntro);
-    localStorage.setItem("cms_aboutIntro", aboutIntro);
-    toast.success("Homepage content saved!");
+  const loadAll = async () => {
+    setLoading(true);
+    const [slidesRes, servicesRes, testimonialsRes, settingsRes, aboutRes, messagesRes] = await Promise.all([
+      supabase.from("hero_slides").select("*").order("sort_order"),
+      supabase.from("services").select("*").order("sort_order"),
+      supabase.from("testimonials").select("*").order("created_at"),
+      supabase.from("site_settings").select("*").limit(1).single(),
+      supabase.from("about_content").select("*").limit(1).single(),
+      supabase.from("contact_messages").select("*").order("created_at", { ascending: false }),
+    ]);
+    setSlides(slidesRes.data || []);
+    setServices(servicesRes.data || []);
+    setTestimonials(testimonialsRes.data || []);
+    setSettings(settingsRes.data);
+    setAbout(aboutRes.data);
+    setMessages(messagesRes.data || []);
+    setLoading(false);
   };
 
-  const saveServices = () => {
-    localStorage.setItem("cms_services", JSON.stringify(services));
-    toast.success("Services saved!");
+  // Hero CRUD
+  const saveSlide = async (slide: any) => {
+    const { error } = await supabase.from("hero_slides").update({ title: slide.title, description: slide.description, sort_order: slide.sort_order, is_active: slide.is_active }).eq("id", slide.id);
+    if (error) toast.error(error.message); else toast.success("Slide saved");
+  };
+  const addSlide = async () => {
+    const { error } = await supabase.from("hero_slides").insert({ title: "New Slide", description: "Description", sort_order: slides.length });
+    if (error) toast.error(error.message); else { toast.success("Slide added"); loadAll(); }
+  };
+  const deleteSlide = async (id: string) => {
+    const { error } = await supabase.from("hero_slides").delete().eq("id", id);
+    if (error) toast.error(error.message); else { toast.success("Slide deleted"); loadAll(); }
   };
 
-  const saveTestimonials = () => {
-    localStorage.setItem("cms_testimonials", JSON.stringify(testimonials));
-    toast.success("Testimonials saved!");
+  // Services CRUD
+  const saveService = async (svc: any) => {
+    const { error } = await supabase.from("services").update({ title: svc.title, description: svc.description, image_url: svc.image_url, sort_order: svc.sort_order }).eq("id", svc.id);
+    if (error) toast.error(error.message); else toast.success("Service saved");
+  };
+  const addService = async () => {
+    const { error } = await supabase.from("services").insert({ title: "New Service", description: "Description", sort_order: services.length });
+    if (error) toast.error(error.message); else { toast.success("Service added"); loadAll(); }
+  };
+  const deleteService = async (id: string) => {
+    const { error } = await supabase.from("services").delete().eq("id", id);
+    if (error) toast.error(error.message); else { toast.success("Service deleted"); loadAll(); }
   };
 
-  const saveSettings = () => {
-    localStorage.setItem("cms_address", address);
-    localStorage.setItem("cms_phone", phone);
-    localStorage.setItem("cms_email", email);
-    localStorage.setItem("cms_copyright", copyright);
-    toast.success("Settings saved!");
+  // Testimonials CRUD
+  const saveTestimonial = async (t: any) => {
+    const { error } = await supabase.from("testimonials").update({ name: t.name, text: t.text, is_active: t.is_active }).eq("id", t.id);
+    if (error) toast.error(error.message); else toast.success("Testimonial saved");
+  };
+  const addTestimonial = async () => {
+    const { error } = await supabase.from("testimonials").insert({ name: "Name", text: "Testimonial text" });
+    if (error) toast.error(error.message); else { toast.success("Testimonial added"); loadAll(); }
+  };
+  const deleteTestimonial = async (id: string) => {
+    const { error } = await supabase.from("testimonials").delete().eq("id", id);
+    if (error) toast.error(error.message); else { toast.success("Testimonial deleted"); loadAll(); }
   };
 
-  const updateService = (index: number, field: keyof ServiceItem, value: string) => {
-    setServices((prev) => prev.map((s, i) => (i === index ? { ...s, [field]: value } : s)));
+  // Settings
+  const saveSettings = async () => {
+    if (!settings) return;
+    const { error } = await supabase.from("site_settings").update({
+      company_name: settings.company_name, phone: settings.phone, email: settings.email, address: settings.address, copyright: settings.copyright,
+    }).eq("id", settings.id);
+    if (error) toast.error(error.message); else toast.success("Settings saved");
   };
 
-  const addService = () => {
-    setServices((prev) => [...prev, { title: "", description: "", image: "" }]);
+  // About
+  const saveAbout = async () => {
+    if (!about) return;
+    const { error } = await supabase.from("about_content").update({
+      executive_summary: about.executive_summary, vision: about.vision, mission: about.mission,
+    }).eq("id", about.id);
+    if (error) toast.error(error.message); else toast.success("About content saved");
   };
 
-  const removeService = (index: number) => {
-    setServices((prev) => prev.filter((_, i) => i !== index));
+  // Messages
+  const toggleRead = async (msg: any) => {
+    await supabase.from("contact_messages").update({ is_read: !msg.is_read }).eq("id", msg.id);
+    loadAll();
+  };
+  const deleteMessage = async (id: string) => {
+    await supabase.from("contact_messages").delete().eq("id", id);
+    toast.success("Message deleted");
+    loadAll();
   };
 
-  const updateTestimonial = (index: number, field: keyof TestimonialItem, value: string) => {
-    setTestimonials((prev) => prev.map((t, i) => (i === index ? { ...t, [field]: value } : t)));
+  const updateSlideLocal = (id: string, field: string, value: any) => {
+    setSlides(prev => prev.map(s => s.id === id ? { ...s, [field]: value } : s));
+  };
+  const updateServiceLocal = (id: string, field: string, value: any) => {
+    setServices(prev => prev.map(s => s.id === id ? { ...s, [field]: value } : s));
+  };
+  const updateTestimonialLocal = (id: string, field: string, value: any) => {
+    setTestimonials(prev => prev.map(t => t.id === id ? { ...t, [field]: value } : t));
   };
 
-  const addTestimonial = () => {
-    setTestimonials((prev) => [...prev, { name: "", role: "", text: "" }]);
-  };
-
-  const removeTestimonial = (index: number) => {
-    setTestimonials((prev) => prev.filter((_, i) => i !== index));
-  };
+  if (loading) return <div className="flex items-center justify-center py-20"><Loader2 className="w-8 h-8 animate-spin text-primary" /></div>;
 
   return (
     <div className="space-y-6">
       <Tabs value={currentTab} onValueChange={(val) => setSearchParams({ tab: val })}>
-        <TabsList className="mb-4">
-          <TabsTrigger value="homepage">Homepage</TabsTrigger>
+        <TabsList className="mb-4 flex-wrap">
+          <TabsTrigger value="hero">Hero Slides</TabsTrigger>
           <TabsTrigger value="services">Services</TabsTrigger>
           <TabsTrigger value="testimonials">Testimonials</TabsTrigger>
+          <TabsTrigger value="about">About</TabsTrigger>
+          <TabsTrigger value="messages">Messages</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
 
-        {/* Homepage Tab */}
-        <TabsContent value="homepage" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-['Rajdhani'] text-xl">Hero / Banner</CardTitle>
-              <p className="text-sm text-muted-foreground">
-                First slide headline and description.
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="heroTitle">Slide 1 – Title</Label>
-                <Input
-                  id="heroTitle"
-                  placeholder="Innovating with AI & Cloud"
-                  value={heroTitle}
-                  onChange={(e) => setHeroTitle(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="heroDesc">Slide 1 – Description</Label>
-                <Textarea
-                  id="heroDesc"
-                  rows={3}
-                  placeholder="We deliver AI, cloud and automation solutions..."
-                  value={heroDesc}
-                  onChange={(e) => setHeroDesc(e.target.value)}
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-['Rajdhani'] text-xl">What we do – Intro</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="weDoIntro">Intro text</Label>
-                <Textarea
-                  id="weDoIntro"
-                  rows={2}
-                  placeholder="We design and deliver end-to-end digital transformation solutions."
-                  value={weDoIntro}
-                  onChange={(e) => setWeDoIntro(e.target.value)}
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-['Rajdhani'] text-xl">About section</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="aboutIntro">About intro text</Label>
-                <Textarea
-                  id="aboutIntro"
-                  rows={3}
-                  placeholder="We design and deliver end-to-end digital transformation solutions—strategy, cloud, data, and automation..."
-                  value={aboutIntro}
-                  onChange={(e) => setAboutIntro(e.target.value)}
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Button onClick={saveHomepage}>Save homepage</Button>
+        {/* Hero Slides */}
+        <TabsContent value="hero" className="space-y-4">
+          {slides.map((slide) => (
+            <Card key={slide.id}>
+              <CardContent className="p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-muted-foreground">Order: {slide.sort_order}</span>
+                  <Button variant="ghost" size="icon" className="text-destructive" onClick={() => deleteSlide(slide.id)}><Trash2 className="h-4 w-4" /></Button>
+                </div>
+                <div className="space-y-2">
+                  <Label>Title</Label>
+                  <Input value={slide.title} onChange={(e) => updateSlideLocal(slide.id, "title", e.target.value)} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Description</Label>
+                  <Textarea value={slide.description} onChange={(e) => updateSlideLocal(slide.id, "description", e.target.value)} rows={2} />
+                </div>
+                <Button size="sm" onClick={() => saveSlide(slide)}>Save</Button>
+              </CardContent>
+            </Card>
+          ))}
+          <Button variant="outline" onClick={addSlide}><Plus className="mr-2 h-4 w-4" /> Add slide</Button>
         </TabsContent>
 
-        {/* Services Tab */}
+        {/* Services */}
         <TabsContent value="services" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-['Rajdhani'] text-xl">Services</CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Edit titles and descriptions. Image paths are relative to the main site.
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {services.map((service, index) => (
-                <div key={index} className="space-y-3 p-4 rounded-lg border border-border bg-muted/30">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-muted-foreground">
-                      Service {index + 1}
-                    </span>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 text-destructive"
-                      onClick={() => removeService(index)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Title</Label>
-                    <Input
-                      value={service.title}
-                      onChange={(e) => updateService(index, "title", e.target.value)}
-                      placeholder="Service title"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Description</Label>
-                    <Textarea
-                      value={service.description}
-                      onChange={(e) => updateService(index, "description", e.target.value)}
-                      rows={2}
-                      placeholder="Service description"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Image path</Label>
-                    <Input
-                      value={service.image}
-                      onChange={(e) => updateService(index, "image", e.target.value)}
-                      placeholder="/assets/service-image.jpg"
-                    />
-                  </div>
+          {services.map((svc) => (
+            <Card key={svc.id}>
+              <CardContent className="p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-muted-foreground">Order: {svc.sort_order}</span>
+                  <Button variant="ghost" size="icon" className="text-destructive" onClick={() => deleteService(svc.id)}><Trash2 className="h-4 w-4" /></Button>
                 </div>
-              ))}
-              <div className="flex gap-3">
-                <Button variant="outline" onClick={addService}>
-                  <Plus className="mr-2 h-4 w-4" /> Add service
-                </Button>
-                <Button onClick={saveServices}>Save all services</Button>
-              </div>
-            </CardContent>
-          </Card>
+                <div className="space-y-2">
+                  <Label>Title</Label>
+                  <Input value={svc.title} onChange={(e) => updateServiceLocal(svc.id, "title", e.target.value)} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Description</Label>
+                  <Textarea value={svc.description} onChange={(e) => updateServiceLocal(svc.id, "description", e.target.value)} rows={2} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Image URL</Label>
+                  <Input value={svc.image_url || ""} onChange={(e) => updateServiceLocal(svc.id, "image_url", e.target.value)} placeholder="https://..." />
+                </div>
+                <Button size="sm" onClick={() => saveService(svc)}>Save</Button>
+              </CardContent>
+            </Card>
+          ))}
+          <Button variant="outline" onClick={addService}><Plus className="mr-2 h-4 w-4" /> Add service</Button>
         </TabsContent>
 
-        {/* Testimonials Tab */}
+        {/* Testimonials */}
         <TabsContent value="testimonials" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-['Rajdhani'] text-xl">Testimonials</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="space-y-3 p-4 rounded-lg border border-border bg-muted/30">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-muted-foreground">
-                      Testimonial {index + 1}
-                    </span>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8 text-destructive"
-                      onClick={() => removeTestimonial(index)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div className="space-y-2">
-                      <Label>Name</Label>
-                      <Input
-                        value={testimonial.name}
-                        onChange={(e) => updateTestimonial(index, "name", e.target.value)}
-                        placeholder="Full name"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label>Role</Label>
-                      <Input
-                        value={testimonial.role}
-                        onChange={(e) => updateTestimonial(index, "role", e.target.value)}
-                        placeholder="CEO, Company"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Testimonial text</Label>
-                    <Textarea
-                      value={testimonial.text}
-                      onChange={(e) => updateTestimonial(index, "text", e.target.value)}
-                      rows={2}
-                      placeholder="What they said..."
-                    />
-                  </div>
+          {testimonials.map((t) => (
+            <Card key={t.id}>
+              <CardContent className="p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-muted-foreground">{t.name}</span>
+                  <Button variant="ghost" size="icon" className="text-destructive" onClick={() => deleteTestimonial(t.id)}><Trash2 className="h-4 w-4" /></Button>
                 </div>
-              ))}
-              <div className="flex gap-3">
-                <Button variant="outline" onClick={addTestimonial}>
-                  <Plus className="mr-2 h-4 w-4" /> Add testimonial
-                </Button>
-                <Button onClick={saveTestimonials}>Save all testimonials</Button>
-              </div>
-            </CardContent>
-          </Card>
+                <div className="space-y-2">
+                  <Label>Name</Label>
+                  <Input value={t.name} onChange={(e) => updateTestimonialLocal(t.id, "name", e.target.value)} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Text</Label>
+                  <Textarea value={t.text} onChange={(e) => updateTestimonialLocal(t.id, "text", e.target.value)} rows={3} />
+                </div>
+                <Button size="sm" onClick={() => saveTestimonial(t)}>Save</Button>
+              </CardContent>
+            </Card>
+          ))}
+          <Button variant="outline" onClick={addTestimonial}><Plus className="mr-2 h-4 w-4" /> Add testimonial</Button>
         </TabsContent>
 
-        {/* Settings Tab */}
+        {/* About */}
+        <TabsContent value="about" className="space-y-4">
+          {about && (
+            <Card>
+              <CardHeader><CardTitle className="font-['Rajdhani'] text-xl">About Content</CardTitle></CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label>Executive Summary</Label>
+                  <Textarea value={about.executive_summary} onChange={(e) => setAbout({ ...about, executive_summary: e.target.value })} rows={4} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Vision</Label>
+                  <Textarea value={about.vision} onChange={(e) => setAbout({ ...about, vision: e.target.value })} rows={3} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Mission</Label>
+                  <Textarea value={about.mission} onChange={(e) => setAbout({ ...about, mission: e.target.value })} rows={3} />
+                </div>
+                <Button onClick={saveAbout}>Save about content</Button>
+              </CardContent>
+            </Card>
+          )}
+        </TabsContent>
+
+        {/* Messages */}
+        <TabsContent value="messages" className="space-y-4">
+          {messages.length === 0 ? (
+            <Card><CardContent className="p-6 text-center text-muted-foreground">No contact messages yet.</CardContent></Card>
+          ) : messages.map((msg) => (
+            <Card key={msg.id} className={msg.is_read ? "opacity-60" : ""}>
+              <CardContent className="p-4">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="font-semibold text-foreground">{msg.name}</span>
+                      <span className="text-xs text-muted-foreground">• {msg.email}</span>
+                      {msg.phone && <span className="text-xs text-muted-foreground">• {msg.phone}</span>}
+                    </div>
+                    <p className="text-sm text-muted-foreground">{msg.message}</p>
+                    <span className="text-xs text-muted-foreground mt-2 block">{new Date(msg.created_at).toLocaleString()}</span>
+                  </div>
+                  <div className="flex gap-1">
+                    <Button variant="ghost" size="icon" onClick={() => toggleRead(msg)} title={msg.is_read ? "Mark unread" : "Mark read"}>
+                      {msg.is_read ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </Button>
+                    <Button variant="ghost" size="icon" className="text-destructive" onClick={() => deleteMessage(msg.id)}><Trash2 className="h-4 w-4" /></Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </TabsContent>
+
+        {/* Settings */}
         <TabsContent value="settings" className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="font-['Rajdhani'] text-xl">Contact / Company info</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="address">Address</Label>
-                <Input
-                  id="address"
-                  placeholder="Sapphire Tower, Dubai, UAE"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="phone">Phone</Label>
-                <Input
-                  id="phone"
-                  placeholder="+971 522 900 966"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="settingEmail">Email</Label>
-                <Input
-                  id="settingEmail"
-                  type="email"
-                  placeholder="Info@tekvion.ae"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="copyrightText">Copyright text</Label>
-                <Input
-                  id="copyrightText"
-                  placeholder="© 2026 All Rights Reserved. TekVion Technologies"
-                  value={copyright}
-                  onChange={(e) => setCopyright(e.target.value)}
-                />
-              </div>
-              <Button onClick={saveSettings}>Save settings</Button>
-            </CardContent>
-          </Card>
+          {settings && (
+            <Card>
+              <CardHeader><CardTitle className="font-['Rajdhani'] text-xl">Company Info</CardTitle></CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label>Company Name</Label>
+                  <Input value={settings.company_name} onChange={(e) => setSettings({ ...settings, company_name: e.target.value })} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Address</Label>
+                  <Input value={settings.address} onChange={(e) => setSettings({ ...settings, address: e.target.value })} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Phone</Label>
+                  <Input value={settings.phone} onChange={(e) => setSettings({ ...settings, phone: e.target.value })} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Email</Label>
+                  <Input value={settings.email} onChange={(e) => setSettings({ ...settings, email: e.target.value })} />
+                </div>
+                <div className="space-y-2">
+                  <Label>Copyright</Label>
+                  <Input value={settings.copyright} onChange={(e) => setSettings({ ...settings, copyright: e.target.value })} />
+                </div>
+                <Button onClick={saveSettings}>Save settings</Button>
+              </CardContent>
+            </Card>
+          )}
         </TabsContent>
       </Tabs>
     </div>
