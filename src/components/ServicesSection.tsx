@@ -5,10 +5,8 @@ import serviceData from "@/assets/service-data.jpg";
 import serviceSecurity from "@/assets/service-security.jpg";
 import serviceApi from "@/assets/service-api.jpg";
 import serviceAutomation from "@/assets/service-automation.jpg";
-import {
-  Globe,
-  Monitor,
-} from "lucide-react";
+import serviceMobile from "@/assets/service-mobile.webp";
+import serviceIt from "@/assets/service-it.png";
 
 const services = [
   {
@@ -39,7 +37,7 @@ const services = [
   {
     title: "Mobile & Web Development",
     description: "Modern web and mobile products with exceptional UX, scalable architecture and rapid delivery.",
-    icon: Globe,
+    image: serviceMobile,
   },
   {
     title: "Intelligent Automation",
@@ -49,14 +47,13 @@ const services = [
   {
     title: "IT & Infrastructure",
     description: "Resilient infrastructure, observability, and managed services to keep systems secure and fast.",
-    icon: Monitor,
+    image: serviceIt,
   },
 ];
 
 const ServicesSection = () => {
   return (
     <section id="what-we-do" className="py-16 sm:py-24 section-light relative overflow-hidden">
-      {/* Decorative blobs */}
       <div className="absolute top-[-100px] right-[-100px] w-[500px] h-[500px] rounded-full bg-primary/5 animate-float" />
       <div className="absolute bottom-[-100px] left-[-100px] w-[400px] h-[400px] rounded-full bg-primary/3 animate-float" style={{ animationDelay: "3s" }} />
 
@@ -85,20 +82,14 @@ const ServicesSection = () => {
               transition={{ delay: i * 0.1 }}
               className="group bg-card rounded-lg overflow-hidden tech-glow border border-border hover:border-primary/30 transition-all"
             >
-              {service.image ? (
-                <div className="h-36 sm:h-48 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-              ) : (
-                <div className="h-36 sm:h-48 flex items-center justify-center bg-gradient-to-br from-primary/10 to-accent/10">
-                  {service.icon && <service.icon className="w-12 sm:w-16 h-12 sm:h-16 text-primary" />}
-                </div>
-              )}
+              <div className="h-36 sm:h-48 overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
               <div className="p-4 sm:p-6">
                 <h3 className="text-lg sm:text-xl font-bold font-display text-foreground mb-2">{service.title}</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">{service.description}</p>
