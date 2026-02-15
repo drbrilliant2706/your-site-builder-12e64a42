@@ -90,7 +90,7 @@ const Footer = () => {
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-white/40">
-            © 2020 All Rights Reserved. Free Html Template
+            © 2026 All Rights Reserved. TekVion Technologies
           </p>
           <div className="flex gap-4">
             {[Facebook, Twitter, Linkedin, Instagram, Youtube].map((Icon, i) => (
