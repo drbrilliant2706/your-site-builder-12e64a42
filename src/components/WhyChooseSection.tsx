@@ -24,7 +24,7 @@ const reasons = [
 
 const WhyChooseSection = () => {
   return (
-    <section className="py-24 section-light relative overflow-hidden">
+    <section className="py-16 sm:py-24 section-light relative overflow-hidden">
       <div className="container relative z-10 px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
