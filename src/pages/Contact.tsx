@@ -2,13 +2,39 @@ import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import bannerContact from "@/assets/banner-contact.jpg";
 
 const Contact = () => {
   return (
     <div className="min-h-screen">
       <Header />
 
-      <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 bg-background">
+      {/* Banner */}
+      <section className="pt-24 sm:pt-32 pb-10 sm:pb-16 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={bannerContact} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(210,80%,15%)]/90 to-[hsl(203,94%,30%)]/80" />
+        </div>
+        <div className="container px-4 relative z-10">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-3xl sm:text-4xl md:text-5xl font-bold font-display text-white mb-4 text-center"
+          >
+            Contact Us
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-base text-white/80 max-w-2xl mx-auto text-center"
+          >
+            Get in touch with our team to discuss your project needs.
+          </motion.p>
+        </div>
+      </section>
+
+      <section className="py-12 sm:py-20 bg-background">
         <div className="container px-4 max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

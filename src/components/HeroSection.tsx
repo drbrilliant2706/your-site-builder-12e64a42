@@ -36,10 +36,10 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero">
       {/* Background image */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-30 dark:opacity-40"
+        className="absolute inset-0 bg-cover bg-center opacity-60"
         style={{ backgroundImage: `url(${heroBanner})` }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-hero/80 via-hero/60 to-hero" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[hsl(222,40%,7%)]/80 via-[hsl(222,40%,7%)]/40 to-transparent" />
 
       {/* Slide number indicator on left */}
       <div className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col items-center gap-2">

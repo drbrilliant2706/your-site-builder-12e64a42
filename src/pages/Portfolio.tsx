@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import bannerPortfolio from "@/assets/banner-portfolio.jpg";
 import serviceAi from "@/assets/service-ai.jpg";
 import serviceCloud from "@/assets/service-cloud.jpg";
 import serviceData from "@/assets/service-data.jpg";
@@ -41,7 +42,11 @@ const Portfolio = () => {
       <Header />
 
       {/* Blue gradient banner */}
-      <section className="pt-24 sm:pt-32 pb-10 sm:pb-16 bg-gradient-to-r from-[hsl(210,80%,20%)] to-[hsl(203,94%,40%)] relative">
+      <section className="pt-24 sm:pt-32 pb-10 sm:pb-16 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={bannerPortfolio} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(210,80%,15%)]/90 to-[hsl(203,94%,30%)]/80" />
+        </div>
         <div className="container px-4 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

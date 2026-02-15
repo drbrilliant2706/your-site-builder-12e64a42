@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import aboutCode from "@/assets/about-code.png";
+import bannerAbout from "@/assets/banner-about.jpg";
 
 const About = () => {
   return (
@@ -9,7 +10,11 @@ const About = () => {
       <Header />
 
       {/* Blue gradient banner */}
-      <section className="pt-24 sm:pt-32 pb-10 sm:pb-16 bg-gradient-to-r from-[hsl(210,80%,20%)] to-[hsl(203,94%,40%)] relative overflow-hidden">
+      <section className="pt-24 sm:pt-32 pb-10 sm:pb-16 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={bannerAbout} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(210,80%,15%)]/90 to-[hsl(203,94%,30%)]/80" />
+        </div>
         <div className="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMCAwaDQwdjQwSDB6Ii8+PC9nPjwvZz48L3N2Zz4=')]" />
         <div className="container px-4 text-center relative z-10">
           <motion.h1
