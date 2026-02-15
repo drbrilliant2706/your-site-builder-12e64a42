@@ -3,7 +3,7 @@ import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Instagram, Youtube } 
 
 const Footer = () => {
   return (
-    <footer className="bg-[hsl(203,90%,35%)] pt-16 pb-8 text-white">
+    <footer className="bg-[hsl(203,90%,35%)] pt-10 sm:pt-16 pb-6 sm:pb-8 text-white">
       <div className="container px-4">
         {/* Subscribe bar */}
         <div className="flex flex-col md:flex-row items-start md:items-center gap-4 mb-12">
@@ -24,7 +24,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 mb-8 sm:mb-12">
           {/* Useful Links */}
           <div>
             <h3 className="text-lg font-bold font-display mb-4 uppercase">Useful Links</h3>
