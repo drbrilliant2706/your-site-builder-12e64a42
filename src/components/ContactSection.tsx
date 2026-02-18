@@ -59,15 +59,15 @@ const ContactSection = () => {
             </h2>
             <form className="space-y-5" onSubmit={handleSubmit}>
               <input type="text" placeholder={t("contact.name")} value={name} onChange={(e) => setName(e.target.value)}
-                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors" />
+                className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors text-sm" />
               <input type="tel" placeholder={t("contact.phone")} value={phone} onChange={(e) => setPhone(e.target.value)}
-                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors" />
+                className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors text-sm" />
               <input type="email" placeholder={t("contact.email")} value={email} onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors" />
-              <textarea placeholder={t("contact.message")} rows={5} value={message} onChange={(e) => setMessage(e.target.value)}
-                className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none" />
+                className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors text-sm" />
+              <textarea placeholder={t("contact.message")} rows={4} value={message} onChange={(e) => setMessage(e.target.value)}
+                className="w-full px-4 sm:px-5 py-3 sm:py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none text-sm" />
               <button type="submit" disabled={sending}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary-dark transition-colors disabled:opacity-60">
+                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 sm:py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:bg-primary-dark transition-colors disabled:opacity-60 text-sm sm:text-base w-full sm:w-auto justify-center">
                 {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                 {t("contact.send")}
               </button>

@@ -29,7 +29,7 @@ const HeroSection = () => {
   const typedStrings = t("hero.typed", { returnObjects: true }) as string[];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero">
+    <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-hero">
       <div className="absolute inset-0 bg-cover bg-center opacity-60" style={{ backgroundImage: `url(${heroBanner})` }} />
       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(222,40%,7%)]/80 via-[hsl(222,40%,7%)]/40 to-transparent rtl:bg-gradient-to-l" />
 
@@ -45,14 +45,14 @@ const HeroSection = () => {
       <div className="container relative z-10 px-4 sm:px-6 pt-24 md:pt-20">
         <AnimatePresence mode="wait">
           <motion.div key={current} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} transition={{ duration: 0.6 }} className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold font-display text-white leading-tight mb-2 sm:mb-4">{slides[current].title}</h1>
-            <div className="text-lg sm:text-xl md:text-2xl text-primary font-display font-semibold mb-4 sm:mb-6 h-8">
+            <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold font-display text-white leading-tight mb-2 sm:mb-4">{slides[current].title}</h1>
+            <div className="text-base sm:text-xl md:text-2xl text-primary font-display font-semibold mb-3 sm:mb-6 h-7 sm:h-8">
               <TypedText strings={typedStrings} typeSpeed={60} backSpeed={30} backDelay={2000} />
             </div>
-            <p className="text-base sm:text-lg md:text-xl text-white/70 mb-8 sm:mb-10 max-w-2xl leading-relaxed">{slides[current].description}</p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-              <a href="#about-us" className="inline-flex items-center justify-center px-6 sm:px-8 py-3 bg-white text-[hsl(220,30%,10%)] font-semibold rounded-sm hover:bg-white/90 transition-colors text-sm sm:text-base">{t("hero.aboutCompany")}</a>
-              <a href="#contact" className="inline-flex items-center justify-center px-6 sm:px-8 py-3 border-2 border-white/30 text-white font-semibold rounded-sm hover:bg-white/10 transition-colors text-sm sm:text-base">{t("hero.contact")}</a>
+            <p className="text-sm sm:text-lg md:text-xl text-white/70 mb-6 sm:mb-10 max-w-2xl leading-relaxed">{slides[current].description}</p>
+            <div className="flex flex-row gap-3 sm:gap-4">
+              <a href="#about-us" className="inline-flex items-center justify-center px-5 sm:px-8 py-2.5 sm:py-3 bg-white text-[hsl(220,30%,10%)] font-semibold rounded-full hover:bg-white/90 transition-colors text-xs sm:text-base">{t("hero.aboutCompany")}</a>
+              <a href="#contact" className="inline-flex items-center justify-center px-5 sm:px-8 py-2.5 sm:py-3 border-2 border-white/30 text-white font-semibold rounded-full hover:bg-white/10 transition-colors text-xs sm:text-base">{t("hero.contact")}</a>
             </div>
           </motion.div>
         </AnimatePresence>
