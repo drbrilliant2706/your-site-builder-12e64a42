@@ -1,0 +1,97 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "whatWeDo": "What we do",
+    "portfolio": "Portfolio",
+    "compliance": "Compliance",
+    "valueProposition": "Value Proposition",
+    "contactUs": "Contact Us",
+    "login": "Login"
+  },
+  "hero": {
+    "aboutCompany": "About Company",
+    "contact": "Contact",
+    "typed": ["Creative Work Idea", "Cutting-edge Technology", "Beautiful Design"]
+  },
+  "services": {
+    "title": "What We",
+    "titleHighlight": "Do",
+    "subtitle": "We design and deliver end-to-end digital transformation solutions.",
+    "aiMl": "AI & Machine Learning",
+    "aiMlDesc": "Applied AI and ML solutions to automate decisions, personalize experiences and unlock new revenue streams.",
+    "cloud": "Cloud Computing",
+    "cloudDesc": "Cloud strategy, migration and managed services to build resilient, scalable platforms for modern apps.",
+    "data": "Big Data & Analytics",
+    "dataDesc": "Scalable data platforms and analytics pipelines that turn raw data into actionable business insight.",
+    "security": "Cybersecurity",
+    "securityDesc": "Comprehensive security services to protect data, secure applications and manage risk across your estate.",
+    "api": "API & Integration",
+    "apiDesc": "Connect platforms and workflows with secure APIs, integrations, and scalable orchestration.",
+    "mobile": "Mobile & Web Development",
+    "mobileDesc": "Modern web and mobile products with exceptional UX, scalable architecture and rapid delivery.",
+    "automation": "Intelligent Automation",
+    "automationDesc": "Streamline operations with workflow automation, RPA, and AI-driven process optimization.",
+    "it": "IT & Infrastructure",
+    "itDesc": "Resilient infrastructure, observability, and managed services to keep systems secure and fast."
+  },
+  "solutions": {
+    "title": "Our",
+    "titleHighlight": "Solutions",
+    "dataManagement": "Data Management",
+    "enterprise": "Enterprise Applications",
+    "automationIntegration": "Automation and Integration",
+    "ai": "Artificial Intelligence and Agentic AI",
+    "cybersecurity": "Cybersecurity and Digital Trust",
+    "cloudSovereignty": "AI Infrastructure & Cloud Sovereignty",
+    "green": "Sustainable & Green Technology",
+    "governance": "Information Technology Governance",
+    "managed": "Managed IT Services",
+    "itsm": "IT Service Management"
+  },
+  "about": {
+    "title": "About",
+    "titleHighlight": "Tekvion",
+    "subtitle": "We design and deliver end-to-end digital transformation solutions—strategy, cloud, data, and automation—helping organizations modernize, scale, and achieve measurable business outcomes.",
+    "vision": "Our Vision",
+    "visionText": "To empower businesses with digital capabilities that unlock new value, improve customer experiences, and create sustainable competitive advantage.",
+    "mission": "Our Mission",
+    "missionText": "Deliver end-to-end transformation by combining strategy, engineering, and design—building trusted platforms and intelligent products that scale."
+  },
+  "whyChoose": {
+    "title": "Why Choose",
+    "titleHighlight": "Tekvion",
+    "subtitle": "We bring fresh perspectives, cutting-edge expertise, and unwavering commitment to transform your business.",
+    "expertTeam": "Expert Team",
+    "expertStat": "100%",
+    "expertDesc": "Certified professionals with deep expertise in AI, cloud, data engineering, and digital transformation.",
+    "modernTech": "Modern Tech Stack",
+    "modernStat": "Latest",
+    "modernDesc": "We leverage cutting-edge technologies and best practices to deliver scalable, future-proof solutions.",
+    "clientSuccess": "Client Success",
+    "clientStat": "Guaranteed",
+    "clientDesc": "Dedicated partnership approach ensuring measurable business outcomes and ROI for every project."
+  },
+  "contact": {
+    "title": "Get In",
+    "titleHighlight": "Touch",
+    "name": "Name",
+    "phone": "Phone Number",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Now",
+    "testimonialsTitle": "What Clients",
+    "testimonialsHighlight": "Say"
+  },
+  "footer": {
+    "subscribe": "Subscribe",
+    "enterEmail": "Enter your email",
+    "usefulLinks": "Useful Links",
+    "news": "News",
+    "company": "Company",
+    "contactUs": "Contact Us",
+    "copyright": "© 2026 All Rights Reserved. TekVion Technologies",
+    "newsText": "It is a long established fact that a reader will be distracted by the readable content of a page when",
+    "companyText": "It is a long established fact that a reader will be distracted by the readable content of a page when"
+  }
+}
