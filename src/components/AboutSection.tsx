@@ -6,7 +6,7 @@ const AboutSection = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="about-us" className="py-16 sm:py-24 section-dark">
+    <section id="about-us" className="py-12 sm:py-24 section-dark">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -27,7 +27,7 @@ const AboutSection = () => {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-8 rounded-lg bg-card border border-border tech-glow"
+            className="p-5 sm:p-8 rounded-lg bg-card border border-border tech-glow"
           >
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6">
               <Eye className="w-6 h-6 text-primary" />
@@ -40,7 +40,7 @@ const AboutSection = () => {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="p-8 rounded-lg bg-card border border-border tech-glow"
+            className="p-5 sm:p-8 rounded-lg bg-card border border-border tech-glow"
           >
             <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
               <Target className="w-6 h-6 text-accent" />
