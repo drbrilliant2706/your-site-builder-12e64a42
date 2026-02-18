@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import serviceAi from "@/assets/service-ai.jpg";
 import serviceCloud from "@/assets/service-cloud.jpg";
 import serviceData from "@/assets/service-data.jpg";
@@ -8,50 +9,20 @@ import serviceAutomation from "@/assets/service-automation.jpg";
 import serviceMobile from "@/assets/service-mobile.webp";
 import serviceIt from "@/assets/service-it.png";
 
-const services = [
-  {
-    title: "AI & Machine Learning",
-    description: "Applied AI and ML solutions to automate decisions, personalize experiences and unlock new revenue streams.",
-    image: serviceAi,
-  },
-  {
-    title: "Cloud Computing",
-    description: "Cloud strategy, migration and managed services to build resilient, scalable platforms for modern apps.",
-    image: serviceCloud,
-  },
-  {
-    title: "Big Data & Analytics",
-    description: "Scalable data platforms and analytics pipelines that turn raw data into actionable business insight.",
-    image: serviceData,
-  },
-  {
-    title: "Cybersecurity",
-    description: "Comprehensive security services to protect data, secure applications and manage risk across your estate.",
-    image: serviceSecurity,
-  },
-  {
-    title: "API & Integration",
-    description: "Connect platforms and workflows with secure APIs, integrations, and scalable orchestration.",
-    image: serviceApi,
-  },
-  {
-    title: "Mobile & Web Development",
-    description: "Modern web and mobile products with exceptional UX, scalable architecture and rapid delivery.",
-    image: serviceMobile,
-  },
-  {
-    title: "Intelligent Automation",
-    description: "Streamline operations with workflow automation, RPA, and AI-driven process optimization.",
-    image: serviceAutomation,
-  },
-  {
-    title: "IT & Infrastructure",
-    description: "Resilient infrastructure, observability, and managed services to keep systems secure and fast.",
-    image: serviceIt,
-  },
-];
-
 const ServicesSection = () => {
+  const { t } = useTranslation();
+
+  const services = [
+    { title: t("services.aiMl"), description: t("services.aiMlDesc"), image: serviceAi },
+    { title: t("services.cloud"), description: t("services.cloudDesc"), image: serviceCloud },
+    { title: t("services.data"), description: t("services.dataDesc"), image: serviceData },
+    { title: t("services.security"), description: t("services.securityDesc"), image: serviceSecurity },
+    { title: t("services.api"), description: t("services.apiDesc"), image: serviceApi },
+    { title: t("services.mobile"), description: t("services.mobileDesc"), image: serviceMobile },
+    { title: t("services.automation"), description: t("services.automationDesc"), image: serviceAutomation },
+    { title: t("services.it"), description: t("services.itDesc"), image: serviceIt },
+  ];
+
   return (
     <section id="what-we-do" className="py-16 sm:py-24 section-light relative overflow-hidden">
       <div className="absolute top-[-100px] right-[-100px] w-[500px] h-[500px] rounded-full bg-primary/5 animate-float" />
@@ -65,17 +36,17 @@ const ServicesSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold font-display text-foreground mb-4">
-            What We <span className="gradient-text">Do</span>
+            {t("services.title")} <span className="gradient-text">{t("services.titleHighlight")}</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We design and deliver end-to-end digital transformation solutions.
+            {t("services.subtitle")}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {services.map((service, i) => (
             <motion.div
-              key={service.title}
+              key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -83,12 +54,7 @@ const ServicesSection = () => {
               className="group bg-card rounded-lg overflow-hidden tech-glow border border-border hover:border-primary/30 transition-all"
             >
               <div className="h-36 sm:h-48 overflow-hidden">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
+                <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
               </div>
               <div className="p-4 sm:p-6">
                 <h3 className="text-lg sm:text-xl font-bold font-display text-foreground mb-2">{service.title}</h3>

@@ -1,23 +1,25 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Globe } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
+import { useTranslation } from "react-i18next";
 import tekvionLogo from "@/assets/tekvion-logo.png";
-
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/#about-us", scrollTo: "about-us" },
-  { label: "What we do", href: "/#what-we-do", scrollTo: "what-we-do" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Compliance", href: "/compliance" },
-  { label: "Value Proposition", href: "/value-proposition" },
-  { label: "Contact Us", href: "/contact" },
-];
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
   const { theme, toggleTheme } = useTheme();
+  const { t, i18n } = useTranslation();
+
+  const navItems = [
+    { label: t("nav.home"), href: "/" },
+    { label: t("nav.about"), href: "/#about-us", scrollTo: "about-us" },
+    { label: t("nav.whatWeDo"), href: "/#what-we-do", scrollTo: "what-we-do" },
+    { label: t("nav.portfolio"), href: "/portfolio" },
+    { label: t("nav.compliance"), href: "/compliance" },
+    { label: t("nav.valueProposition"), href: "/value-proposition" },
+    { label: t("nav.contactUs"), href: "/contact" },
+  ];
 
   const handleNavClick = (item: typeof navItems[0]) => {
     setMobileOpen(false);
@@ -25,6 +27,11 @@ const Header = () => {
       const el = document.getElementById(item.scrollTo);
       el?.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "ar" ? "en" : "ar";
+    i18n.changeLanguage(newLang);
   };
 
   return (
@@ -50,11 +57,19 @@ const Header = () => {
             to="/login"
             className="text-sm font-semibold text-white hover:text-primary transition-colors ml-4"
           >
-            Login
+            {t("nav.login")}
           </Link>
           <button
+            onClick={toggleLanguage}
+            className="ml-2 w-9 h-9 rounded-full flex items-center justify-center bg-white/5 hover:bg-primary/10 text-white/70 hover:text-primary transition-all gap-1"
+            aria-label="Switch language"
+          >
+            <Globe className="w-4 h-4" />
+            <span className="text-[10px] font-bold">{i18n.language === "ar" ? "EN" : "ع"}</span>
+          </button>
+          <button
             onClick={toggleTheme}
-            className="ml-2 w-9 h-9 rounded-full flex items-center justify-center bg-white/5 hover:bg-primary/10 text-white/70 hover:text-primary transition-all"
+            className="w-9 h-9 rounded-full flex items-center justify-center bg-white/5 hover:bg-primary/10 text-white/70 hover:text-primary transition-all"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -63,6 +78,14 @@ const Header = () => {
 
         {/* Mobile controls */}
         <div className="flex items-center gap-2 lg:hidden">
+          <button
+            onClick={toggleLanguage}
+            className="w-9 h-9 rounded-full flex items-center justify-center bg-white/5 hover:bg-primary/10 text-white/70 hover:text-primary transition-all gap-1"
+            aria-label="Switch language"
+          >
+            <Globe className="w-3.5 h-3.5" />
+            <span className="text-[10px] font-bold">{i18n.language === "ar" ? "EN" : "ع"}</span>
+          </button>
           <button
             onClick={toggleTheme}
             className="w-9 h-9 rounded-full flex items-center justify-center bg-white/5 hover:bg-primary/10 text-white/70 hover:text-primary transition-all"
@@ -98,7 +121,7 @@ const Header = () => {
             onClick={() => setMobileOpen(false)}
             className="block py-3 text-sm font-semibold text-white hover:text-primary transition-colors"
           >
-            Login
+            {t("nav.login")}
           </Link>
         </div>
       )}

@@ -1,29 +1,32 @@
 import { motion } from "framer-motion";
 import { Users, Cpu, Trophy } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import choseGeometric from "@/assets/chose-geometric.png";
 
-const reasons = [
-  {
-    icon: Users,
-    title: "Expert Team",
-    stat: "100%",
-    description: "Certified professionals with deep expertise in AI, cloud, data engineering, and digital transformation.",
-  },
-  {
-    icon: Cpu,
-    title: "Modern Tech Stack",
-    stat: "Latest",
-    description: "We leverage cutting-edge technologies and best practices to deliver scalable, future-proof solutions.",
-  },
-  {
-    icon: Trophy,
-    title: "Client Success",
-    stat: "Guaranteed",
-    description: "Dedicated partnership approach ensuring measurable business outcomes and ROI for every project.",
-  },
-];
-
 const WhyChooseSection = () => {
+  const { t } = useTranslation();
+
+  const reasons = [
+    {
+      icon: Users,
+      title: t("whyChoose.expertTeam"),
+      stat: t("whyChoose.expertStat"),
+      description: t("whyChoose.expertDesc"),
+    },
+    {
+      icon: Cpu,
+      title: t("whyChoose.modernTech"),
+      stat: t("whyChoose.modernStat"),
+      description: t("whyChoose.modernDesc"),
+    },
+    {
+      icon: Trophy,
+      title: t("whyChoose.clientSuccess"),
+      stat: t("whyChoose.clientStat"),
+      description: t("whyChoose.clientDesc"),
+    },
+  ];
+
   return (
     <section className="py-16 sm:py-24 section-light relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
@@ -37,17 +40,17 @@ const WhyChooseSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold font-display text-foreground mb-4">
-            Why Choose <span className="gradient-text">Tekvion</span>
+            {t("whyChoose.title")} <span className="gradient-text">{t("whyChoose.titleHighlight")}</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We bring fresh perspectives, cutting-edge expertise, and unwavering commitment to transform your business.
+            {t("whyChoose.subtitle")}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {reasons.map((reason, i) => (
             <motion.div
-              key={reason.title}
+              key={i}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

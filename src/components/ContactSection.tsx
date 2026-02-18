@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import { contactSchema, checkRateLimit } from "@/lib/validation";
+import { useTranslation } from "react-i18next";
 
 const ContactSection = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
@@ -13,6 +14,7 @@ const ContactSection = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [sending, setSending] = useState(false);
+  const { t } = useTranslation();
 
   const { data: testimonials = [] } = useQuery({
     queryKey: ["testimonials"],
@@ -53,28 +55,28 @@ const ContactSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl sm:text-4xl font-bold font-display mb-6 sm:mb-8">
-              Get In <span className="gradient-text">Touch</span>
+              {t("contact.title")} <span className="gradient-text">{t("contact.titleHighlight")}</span>
             </h2>
             <form className="space-y-5" onSubmit={handleSubmit}>
-              <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}
+              <input type="text" placeholder={t("contact.name")} value={name} onChange={(e) => setName(e.target.value)}
                 className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors" />
-              <input type="tel" placeholder="Phone Number" value={phone} onChange={(e) => setPhone(e.target.value)}
+              <input type="tel" placeholder={t("contact.phone")} value={phone} onChange={(e) => setPhone(e.target.value)}
                 className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors" />
-              <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}
+              <input type="email" placeholder={t("contact.email")} value={email} onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors" />
-              <textarea placeholder="Message" rows={5} value={message} onChange={(e) => setMessage(e.target.value)}
+              <textarea placeholder={t("contact.message")} rows={5} value={message} onChange={(e) => setMessage(e.target.value)}
                 className="w-full px-5 py-4 rounded-sm bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors resize-none" />
               <button type="submit" disabled={sending}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-sm hover:bg-primary-dark transition-colors disabled:opacity-60">
                 {sending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-                Send Now
+                {t("contact.send")}
               </button>
             </form>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <h2 className="text-3xl sm:text-4xl font-bold font-display mb-6 sm:mb-8">
-              What Clients <span className="gradient-text">Say</span>
+              {t("contact.testimonialsTitle")} <span className="gradient-text">{t("contact.testimonialsHighlight")}</span>
             </h2>
             {testimonials.length > 0 && (
               <>
