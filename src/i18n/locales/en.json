@@ -188,6 +188,13 @@
   "notFound": {
     "title": "404",
     "message": "Oops! Page not found",
+    "subtitle": "The page you're looking for doesn't exist or has been moved.",
     "backHome": "Return to Home"
+  },
+  "errorPage": {
+    "title": "Something went wrong",
+    "message": "An unexpected error occurred. Please try again or return to the homepage.",
+    "retry": "Try Again",
+    "backHome": "Go Home"
   }
 }
