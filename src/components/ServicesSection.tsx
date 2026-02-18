@@ -50,7 +50,7 @@ const ServicesSection = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.15, duration: 0.7 }}
               className="group bg-card rounded-lg overflow-hidden tech-glow border border-border hover:border-primary/30 transition-all"
             >
               <div className="h-36 sm:h-48 overflow-hidden">

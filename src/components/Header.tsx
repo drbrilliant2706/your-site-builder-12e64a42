@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Sun, Moon, Globe } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
 import { useTranslation } from "react-i18next";
+import { motion, AnimatePresence } from "framer-motion";
 import tekvionLogo from "@/assets/tekvion-logo.png";
 
 const Header = () => {
@@ -103,28 +104,50 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-[hsl(220,20%,12%)]/95 backdrop-blur-md border-t border-white/5 px-4 pb-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              to={item.href}
-              onClick={() => handleNavClick(item)}
-              className="block py-3 text-sm text-white/70 hover:text-primary transition-colors border-b border-white/5"
-            >
-              {item.label}
-            </Link>
-          ))}
-          <Link
-            to="/login"
-            onClick={() => setMobileOpen(false)}
-            className="block py-3 text-sm font-semibold text-white hover:text-primary transition-colors"
+      {/* Animated mobile menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.35, ease: "easeInOut" }}
+            className="lg:hidden bg-[hsl(220,20%,12%)]/95 backdrop-blur-md border-t border-white/5 overflow-hidden"
           >
-            {t("nav.login")}
-          </Link>
-        </div>
-      )}
+            <div className="px-4 pb-6">
+              {navItems.map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.06, duration: 0.3 }}
+                >
+                  <Link
+                    to={item.href}
+                    onClick={() => handleNavClick(item)}
+                    className="block py-3 text-sm text-white/70 hover:text-primary transition-colors border-b border-white/5"
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navItems.length * 0.06, duration: 0.3 }}
+              >
+                <Link
+                  to="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="block py-3 text-sm font-semibold text-white hover:text-primary transition-colors"
+                >
+                  {t("nav.login")}
+                </Link>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

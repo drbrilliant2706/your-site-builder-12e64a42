@@ -54,7 +54,7 @@ const WhyChooseSection = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
+              transition={{ delay: i * 0.2, duration: 0.7 }}
               className="text-center p-8 rounded-lg bg-card border border-border tech-glow"
             >
               <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">

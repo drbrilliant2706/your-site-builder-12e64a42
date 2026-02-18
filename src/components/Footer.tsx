@@ -28,9 +28,9 @@ const Footer = () => {
             <input
               type="email"
               placeholder={t("footer.enterEmail")}
-              className="flex-1 min-w-0 px-3 sm:px-4 py-3 bg-white/10 border border-white/20 placeholder:text-white/40 rounded-s-sm text-sm focus:outline-none focus:border-white/50 text-white"
+              className="flex-1 min-w-0 px-3 sm:px-4 py-3 bg-white/10 border border-white/20 placeholder:text-white/40 rounded-l-full text-sm focus:outline-none focus:border-white/50 text-white rtl:rounded-l-none rtl:rounded-r-full"
             />
-            <button className="px-4 sm:px-6 py-3 bg-accent text-white font-semibold text-xs sm:text-sm rounded-e-sm hover:brightness-110 transition-all whitespace-nowrap uppercase tracking-wide">
+            <button className="px-4 sm:px-6 py-3 bg-accent text-white font-semibold text-xs sm:text-sm rounded-r-full hover:brightness-110 transition-all whitespace-nowrap uppercase tracking-wide rtl:rounded-r-none rtl:rounded-l-full">
               {t("footer.subscribe")}
             </button>
           </div>

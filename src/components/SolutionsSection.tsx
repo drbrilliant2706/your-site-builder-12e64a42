@@ -42,7 +42,7 @@ const SolutionsSection = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
+              transition={{ delay: i * 0.08, duration: 0.7 }}
               className="group flex flex-col items-center text-center p-4 sm:p-6 rounded-lg bg-card border border-border hover:border-primary/50 tech-glow transition-all cursor-default"
             >
               <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-primary/10 flex items-center justify-center mb-3 sm:mb-4 group-hover:bg-primary/20 transition-colors">
