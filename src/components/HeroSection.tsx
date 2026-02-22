@@ -12,17 +12,18 @@ const bgImages = [heroBanner, heroBg2, heroBg3];
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const [bgIndex, setBgIndex] = useState(0);
-  const [dbSlides, setDbSlides] = useState<{ title: string; description: string }[]>([]);
-  const { t } = useTranslation();
+  const [dbSlides, setDbSlides] = useState<{ title: string; description: string; title_ar?: string; description_ar?: string }[]>([]);
+  const { t, i18n } = useTranslation();
+  const isRtl = i18n.language === "ar";
 
-  const fallbackSlides = [
+  const fallbackSlides: { title: string; description: string; title_ar?: string; description_ar?: string }[] = [
     { title: t("hero.defaultTitle"), description: t("hero.defaultDesc") },
   ];
 
   const slides = dbSlides.length > 0 ? dbSlides : fallbackSlides;
 
   useEffect(() => {
-    supabase.from("hero_slides").select("title, description").eq("is_active", true).order("sort_order").then(({ data }) => {
+    supabase.from("hero_slides").select("title, description, title_ar, description_ar").eq("is_active", true).order("sort_order").then(({ data }) => {
       if (data && data.length > 0) setDbSlides(data);
     });
   }, []);
@@ -70,11 +71,15 @@ const HeroSection = () => {
       <div className="container relative z-10 px-4 sm:px-6 pt-24 md:pt-20">
         <AnimatePresence mode="wait">
           <motion.div key={current} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -30 }} transition={{ duration: 0.6 }} className="max-w-3xl">
-            <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold font-display text-white leading-tight mb-2 sm:mb-4">{slides[current].title}</h1>
+            <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-bold font-display text-white leading-tight mb-2 sm:mb-4">
+              {isRtl && slides[current].title_ar ? slides[current].title_ar : slides[current].title}
+            </h1>
             <div className="text-base sm:text-xl md:text-2xl text-primary font-display font-semibold mb-3 sm:mb-6 h-7 sm:h-8">
               <TypedText strings={typedStrings} typeSpeed={60} backSpeed={30} backDelay={2000} />
             </div>
-            <p className="text-sm sm:text-lg md:text-xl text-white/70 mb-6 sm:mb-10 max-w-2xl leading-relaxed">{slides[current].description}</p>
+            <p className="text-sm sm:text-lg md:text-xl text-white/70 mb-6 sm:mb-10 max-w-2xl leading-relaxed">
+              {isRtl && slides[current].description_ar ? slides[current].description_ar : slides[current].description}
+            </p>
             <div className="flex flex-row gap-3 sm:gap-4">
               <a href="#about-us" className="inline-flex items-center justify-center px-5 sm:px-8 py-2.5 sm:py-3 bg-white text-[hsl(220,30%,10%)] font-semibold rounded-full hover:bg-white/90 transition-colors text-xs sm:text-base">{t("hero.aboutCompany")}</a>
               <a href="#contact" className="inline-flex items-center justify-center px-5 sm:px-8 py-2.5 sm:py-3 border-2 border-white/30 text-white font-semibold rounded-full hover:bg-white/10 transition-colors text-xs sm:text-base">{t("hero.contact")}</a>
