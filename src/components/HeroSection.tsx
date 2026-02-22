@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import heroBanner from "@/assets/hero-banner.jpg";
+import heroBg2 from "@/assets/hero-bg-2.png";
+import heroBg3 from "@/assets/hero-bg-3.png";
 import TypedText from "./TypedText";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
@@ -9,8 +11,11 @@ const fallbackSlides = [
   { title: "Innovating with AI & Cloud", description: "We deliver AI, cloud and automation solutions to accelerate business outcomes and drive measurable value." },
 ];
 
+const bgImages = [heroBanner, heroBg2, heroBg3];
+
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
+  const [bgIndex, setBgIndex] = useState(0);
   const [slides, setSlides] = useState(fallbackSlides);
   const { t } = useTranslation();
 
@@ -26,11 +31,29 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, [slides.length]);
 
+  // Slowly rotate background images every 8 seconds
+  useEffect(() => {
+    const bgTimer = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % bgImages.length);
+    }, 8000);
+    return () => clearInterval(bgTimer);
+  }, []);
+
   const typedStrings = t("hero.typed", { returnObjects: true }) as string[];
 
   return (
     <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-hero">
-      <div className="absolute inset-0 bg-cover bg-center opacity-60" style={{ backgroundImage: `url(${heroBanner})` }} />
+      {/* Background images with slow crossfade */}
+      {bgImages.map((img, i) => (
+        <motion.div
+          key={i}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${img})` }}
+          animate={{ opacity: i === bgIndex ? 0.6 : 0 }}
+          transition={{ duration: 2.5, ease: "easeInOut" }}
+        />
+      ))}
+
       <div className="absolute inset-0 bg-gradient-to-r from-[hsl(222,40%,7%)]/80 via-[hsl(222,40%,7%)]/40 to-transparent rtl:bg-gradient-to-l" />
 
       <div className="absolute left-4 md:left-6 top-1/2 -translate-y-1/2 z-20 hidden md:flex flex-col items-center gap-2 rtl:left-auto rtl:right-4 md:rtl:right-6">
