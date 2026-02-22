@@ -33,12 +33,12 @@ const ServicesSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-display text-foreground mb-4">
+         <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold font-display text-foreground mb-3 sm:mb-4">
             {t("services.title")} <span className="gradient-text">{t("services.titleHighlight")}</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto">
             {t("services.subtitle")}
           </p>
         </motion.div>
