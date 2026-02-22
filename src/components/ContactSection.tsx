@@ -28,11 +28,11 @@ const ContactSection = () => {
     e.preventDefault();
     const result = contactSchema.safeParse({ name, email, phone, message });
     if (!result.success) {
-      toast.error(result.error.errors[0]?.message || "Invalid input");
+      toast.error(result.error.errors[0]?.message || t("toast.invalidInput"));
       return;
     }
     if (!checkRateLimit("contact-section")) {
-      toast.error("Too many submissions. Please wait a moment.");
+      toast.error(t("toast.tooManySubmissions"));
       return;
     }
     setSending(true);
@@ -43,8 +43,8 @@ const ContactSection = () => {
       message: result.data.message,
     });
     setSending(false);
-    if (error) toast.error("Failed to send"); else {
-      toast.success("Message sent!");
+    if (error) toast.error(t("toast.failedToSend")); else {
+      toast.success(t("toast.messageSent"));
       setName(""); setPhone(""); setEmail(""); setMessage("");
     }
   };

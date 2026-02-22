@@ -92,7 +92,26 @@
     "contactUs": "Contact Us",
     "copyright": "© 2026 All Rights Reserved. TekVion Technologies",
     "newsText": "It is a long established fact that a reader will be distracted by the readable content of a page when",
-    "companyText": "It is a long established fact that a reader will be distracted by the readable content of a page when"
+    "companyText": "It is a long established fact that a reader will be distracted by the readable content of a page when",
+    "address": "Sapphire Tower, Dubai, UAE",
+    "call": "Call",
+    "phone": "+971 522 900 966",
+    "email": "Info@tekvion.ae"
+  },
+  "toast": {
+    "invalidInput": "Invalid input",
+    "tooManySubmissions": "Too many submissions. Please wait a moment.",
+    "messageSent": "Message sent!",
+    "messageSentSuccess": "Message sent successfully!",
+    "failedToSend": "Failed to send",
+    "failedToSendMessage": "Failed to send message"
+  },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "message": "An unexpected error occurred. Please try again.",
+    "errorDetails": "Error details",
+    "tryAgain": "Try Again",
+    "goHome": "Go Home"
   },
   "aboutPage": {
     "title": "About Tekvion",
