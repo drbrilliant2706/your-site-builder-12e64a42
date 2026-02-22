@@ -12,7 +12,9 @@
   "hero": {
     "aboutCompany": "About Company",
     "contact": "Contact",
-    "typed": ["Creative Work Idea", "Cutting-edge Technology", "Beautiful Design"]
+    "typed": ["Creative Work Idea", "Cutting-edge Technology", "Beautiful Design"],
+    "defaultTitle": "Innovating with AI & Cloud",
+    "defaultDesc": "We deliver AI, cloud and automation solutions to accelerate business outcomes and drive measurable value."
   },
   "services": {
     "title": "What We",
