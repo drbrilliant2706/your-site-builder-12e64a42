@@ -65,18 +65,18 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-sm text-white/60">
                 <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                Sapphire Tower, Dubai, UAE
+                {t("footer.address")}
               </li>
               <li>
                 <a href="tel:+971522900966" className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-all">
                   <Phone className="w-4 h-4 shrink-0" />
-                  Call +971 522 900 966
+                  {t("footer.call")} {t("footer.phone")}
                 </a>
               </li>
               <li>
                 <a href="mailto:Info@tekvion.ae" className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-all">
                   <Mail className="w-4 h-4 shrink-0" />
-                  Info@tekvion.ae
+                  {t("footer.email")}
                 </a>
               </li>
             </ul>

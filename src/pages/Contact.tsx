@@ -20,12 +20,12 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = contactSchema.safeParse({ name, email, phone, message });
-    if (!result.success) { toast.error(result.error.errors[0]?.message || "Invalid input"); return; }
-    if (!checkRateLimit("contact-form")) { toast.error("Too many submissions. Please wait a moment."); return; }
+    if (!result.success) { toast.error(result.error.errors[0]?.message || t("toast.invalidInput")); return; }
+    if (!checkRateLimit("contact-form")) { toast.error(t("toast.tooManySubmissions")); return; }
     setLoading(true);
     const { error } = await supabase.from("contact_messages").insert({ name: result.data.name, phone: result.data.phone || "", email: result.data.email, message: result.data.message });
     setLoading(false);
-    if (error) { toast.error("Failed to send message"); } else { toast.success("Message sent successfully!"); setName(""); setPhone(""); setEmail(""); setMessage(""); }
+    if (error) { toast.error(t("toast.failedToSendMessage")); } else { toast.success(t("toast.messageSentSuccess")); setName(""); setPhone(""); setEmail(""); setMessage(""); }
   };
 
   return (
