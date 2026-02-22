@@ -7,21 +7,23 @@ import TypedText from "./TypedText";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "react-i18next";
 
-const fallbackSlides = [
-  { title: "Innovating with AI & Cloud", description: "We deliver AI, cloud and automation solutions to accelerate business outcomes and drive measurable value." },
-];
-
 const bgImages = [heroBanner, heroBg2, heroBg3];
 
 const HeroSection = () => {
   const [current, setCurrent] = useState(0);
   const [bgIndex, setBgIndex] = useState(0);
-  const [slides, setSlides] = useState(fallbackSlides);
+  const [dbSlides, setDbSlides] = useState<{ title: string; description: string }[]>([]);
   const { t } = useTranslation();
+
+  const fallbackSlides = [
+    { title: t("hero.defaultTitle"), description: t("hero.defaultDesc") },
+  ];
+
+  const slides = dbSlides.length > 0 ? dbSlides : fallbackSlides;
 
   useEffect(() => {
     supabase.from("hero_slides").select("title, description").eq("is_active", true).order("sort_order").then(({ data }) => {
-      if (data && data.length > 0) setSlides(data);
+      if (data && data.length > 0) setDbSlides(data);
     });
   }, []);
 
