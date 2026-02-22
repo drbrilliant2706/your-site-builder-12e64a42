@@ -12,12 +12,12 @@ const AboutSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold font-display mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold font-display mb-3 sm:mb-4">
             {t("about.title")} <span className="gradient-text">{t("about.titleHighlight")}</span>
           </h2>
-          <p className="text-lg opacity-60 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-lg opacity-60 max-w-3xl mx-auto">
             {t("about.subtitle")}
           </p>
         </motion.div>
@@ -29,11 +29,11 @@ const AboutSection = () => {
             viewport={{ once: true }}
             className="p-5 sm:p-8 rounded-lg bg-card border border-border tech-glow"
           >
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-6">
-              <Eye className="w-6 h-6 text-primary" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 sm:mb-6">
+              <Eye className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
             </div>
-            <h3 className="text-2xl font-bold font-display mb-4">{t("about.vision")}</h3>
-            <p className="opacity-60 leading-relaxed">{t("about.visionText")}</p>
+            <h3 className="text-xl sm:text-2xl font-bold font-display mb-3 sm:mb-4">{t("about.vision")}</h3>
+            <p className="opacity-60 leading-relaxed text-sm sm:text-base">{t("about.visionText")}</p>
           </motion.div>
 
           <motion.div
@@ -42,11 +42,11 @@ const AboutSection = () => {
             viewport={{ once: true }}
             className="p-5 sm:p-8 rounded-lg bg-card border border-border tech-glow"
           >
-            <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
-              <Target className="w-6 h-6 text-accent" />
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-accent/10 flex items-center justify-center mb-4 sm:mb-6">
+              <Target className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
             </div>
-            <h3 className="text-2xl font-bold font-display mb-4">{t("about.mission")}</h3>
-            <p className="opacity-60 leading-relaxed">{t("about.missionText")}</p>
+            <h3 className="text-xl sm:text-2xl font-bold font-display mb-3 sm:mb-4">{t("about.mission")}</h3>
+            <p className="opacity-60 leading-relaxed text-sm sm:text-base">{t("about.missionText")}</p>
           </motion.div>
         </div>
       </div>

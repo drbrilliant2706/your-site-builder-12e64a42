@@ -80,10 +80,10 @@ const ContactSection = () => {
             </h2>
             {testimonials.length > 0 && (
               <>
-                <div className="relative p-8 rounded-lg bg-card border border-border min-h-[280px]">
-                  <Quote className="w-10 h-10 text-primary/20 mb-4" />
-                  <p className="opacity-70 leading-relaxed mb-6 text-lg">{testimonials[currentTestimonial]?.text}</p>
-                  <p className="font-bold font-display text-xl text-primary">{testimonials[currentTestimonial]?.name}</p>
+                <div className="relative p-5 sm:p-8 rounded-lg bg-card border border-border min-h-0 sm:min-h-[280px]">
+                  <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-primary/20 mb-3 sm:mb-4" />
+                  <p className="opacity-70 leading-relaxed mb-4 sm:mb-6 text-sm sm:text-lg">{testimonials[currentTestimonial]?.text}</p>
+                  <p className="font-bold font-display text-lg sm:text-xl text-primary">{testimonials[currentTestimonial]?.name}</p>
                 </div>
                 <div className="flex gap-3 mt-6">
                   {testimonials.map((_: any, i: number) => (
